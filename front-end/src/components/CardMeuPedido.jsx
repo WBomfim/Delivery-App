@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export default function CardMeuPedidos({ cardId, id, status, data, price }) {
   return (
-    <Link to={ `/detalhe-pedido/${id}` }>
+    <Link to={ `/customer/orders/${id}` }>
       <div data-testids={ `customer_orders__element-order-id-${cardId}` }>
         <p>Pedido</p>
         { id }
