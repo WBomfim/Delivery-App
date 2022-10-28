@@ -15,7 +15,7 @@ export default function CardMeuPedidos({ cardId, id, status, data, price }) {
         { data }
       </h4>
       <h4 data-testids={ `customer_orders__element-card-price-${cardId}` }>
-        { price }
+        { `R$ ${price}` }
       </h4>
     </section>
   );
