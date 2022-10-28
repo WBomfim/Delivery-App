@@ -1,8 +1,10 @@
 const joi = require('joi');
 
-const schemaEmail = joi.email().empty().required().messages({
+const schemaEmail = joi.string().email().empty().required()
+  .messages({
   'string.empty': '400|The "email" field is required',
   'any.required': '400|email is required',
+  'string.email': '400|Invalid email',
 });
 
 const schemaPassword = joi.string().min(6).empty().required()
