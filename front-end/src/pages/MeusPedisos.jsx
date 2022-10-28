@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import CardMeuPedidos from '../components/CardMeuPedido';
+import Header from '../components/Header';
 
 export default function MeusPedidos() {
   const [produtos, setProdutos] = useState([]);
@@ -23,6 +24,7 @@ export default function MeusPedidos() {
 
   return (
     <section>
+      <Header />
       {
         produtos.map(({ id, status, data, price }) => (
           <CardMeuPedidos
