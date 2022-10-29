@@ -41,6 +41,11 @@ export default function DetalhePedido() {
           </button>
         </div>
         <Table />
+        <h2
+          data-testids="customer_order_details__element-order-total-price"
+        >
+          Total: R$ 28,46
+        </h2>
       </div>
     </section>
   );
