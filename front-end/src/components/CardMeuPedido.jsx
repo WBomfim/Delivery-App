@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 export default function CardMeuPedidos({ cardId, id, status, data, price }) {
   return (
-    <section>
+    <Link to={ `/customer/orders/${id}` }>
       <div data-testids={ `customer_orders__element-order-id-${cardId}` }>
         <p>Pedido</p>
         { id }
@@ -17,7 +18,7 @@ export default function CardMeuPedidos({ cardId, id, status, data, price }) {
       <h4 data-testids={ `customer_orders__element-card-price-${cardId}` }>
         { `R$ ${price}` }
       </h4>
-    </section>
+    </Link>
   );
 }
 
