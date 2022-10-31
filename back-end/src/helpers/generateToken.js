@@ -4,9 +4,11 @@ const jwt = require('jsonwebtoken');
 const secret = 'my-secret-key';
 
 const generateToken = (user) => {
+  const { id, email, role } = user;
   const payload = {
-    id: user.id,
-    email: user.email,
+    id,
+    email,
+    role,
   };
 
   const config = {

@@ -5,7 +5,7 @@ const { errorsTypes } = require('../utils/errorsCatalog');
 // alterar para variaveis de ambiente
 const secret = 'my-secret-key';
 
-const auth = (req, res, next) => {
+const auth = (req, _res, next) => {
   const token = req.headers.authorization;
 
   if (!token) throw new Error(errorsTypes.TOKEN_NOT_FOUND);
