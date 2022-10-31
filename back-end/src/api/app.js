@@ -18,7 +18,7 @@ app.use('/login', loginRoutes);
 
 app.use('/register', registerRoutes);
 
-app.use('/products', productsRoutes);
+app.use('/customer/products', productsRoutes);
 
 app.use(handleErros);
 
