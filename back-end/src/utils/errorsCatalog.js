@@ -2,8 +2,7 @@ const statusHttp = require('./statusHttp');
 
 const errorsTypes = {
   USER_NOT_FOUND: 'USER_NOT_FOUND',
-  INVALID_USER: 'INVALID_USER',
-  INVALID_EMAIL: 'INVALID_EMAIL',
+  USER_EXIST: 'USER_EXIST',
   INVALID_PASSWORD: 'INVALID_PASSWORD',
   TOKEN_NOT_FOUND: 'TOKEN_NOT_FOUND',
   INVALID_TOKEN: 'INVALID_TOKEN',
@@ -12,27 +11,23 @@ const errorsTypes = {
 const errorsCatalog = {
   USER_NOT_FOUND: {
     statusHttp: statusHttp.NOT_FOUND,
-    error: 'User not found',
+    message: 'User not found',
   },
-  INVALID_USER: {
-    statusHttp: statusHttp.UNAUTHORIZED,
-    error: 'Invalid user',
-  },
-  INVALID_EMAIL: {
+  USER_EXIST: {
     statusHttp: statusHttp.CONFLICT,
-    error: 'Conflict',
+    message: 'User already registered',
   },
   INVALID_PASSWORD: {
     statusHttp: statusHttp.UNAUTHORIZED,
-    error: 'Invalid password',
+    message: 'Invalid password',
   },
   TOKEN_NOT_FOUND: {
     statusHttp: statusHttp.UNAUTHORIZED,
-    error: 'Token not found',
+    message: 'Token not found',
   },
   INVALID_TOKEN: {
     statusHttp: statusHttp.UNAUTHORIZED,
-    error: 'Expired or invalid token',
+    message: 'Expired or invalid token',
   },
 };
 
