@@ -25,6 +25,10 @@ module.exports = {
           key: 'id',
         },
       },
+      quantity: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
     });
 
     return salesProductsTable;
