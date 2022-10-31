@@ -1,10 +1,45 @@
+const md5 = require('md5');
 const { user } = require('../database/models');
+const generateToken = require('../helpers/generateToken');
+const { validateLoginInfos, validateRegisterInfos } = require('../schemas/validateUserInfos');
+const { errorsTypes } = require('../utils/errorsCatalog');
 
-const getUser = async (email) => {
-  const userData = await user.findOne({ where: { email } });
-  return userData;
+const login = async (email, password) => {
+  validateLoginInfos({ email, password });
+  const userExist = await user.findOne({ where: { email } });
+  if (!userExist) throw new Error(errorsTypes.USER_NOT_FOUND);
+  const { password: userPassword } = userExist;
+  if (md5(password) !== userPassword) throw new Error(errorsTypes.INVALID_PASSWORD);
+  const token = generateToken(user);
+  return {
+    name: userExist.name,
+    email: userExist.email,
+    role: userExist.role,
+    token,
+  };
+};
+
+const addUser = async (name, email, password) => {
+  validateRegisterInfos({ name, email, password });
+  const userExist = await user.findOne({ where: { email } });
+  if (userExist) throw new Error(errorsTypes.USER_EXIST);
+  const newUserFormat = {
+    name,
+    email,
+    password: md5(password),
+    role: 'customer',
+  };
+  const newUser = await user.create(newUserFormat);
+  const token = generateToken(newUser);
+  return {
+    name: newUser.name,
+    email: newUser.email,
+    role: newUser.role,
+    token,
+  };
 };
 
 module.exports = {
-  getUser,
+  login,
+  addUser,
 };
