@@ -22,13 +22,14 @@ export default function Login() {
 
   const login = async (event) => {
     event.preventDefault();
+    setFailedTryLogin(false);
     try {
       const response = await requestLogin('/login', { email, password });
       localStorage.setItem('userTrybeer', JSON.stringify(response));
       if (response.role === 'seller') {
-        navigate('/seller/orders');
+        return navigate('/seller/orders');
       }
-      navigate('/customer/products');
+      return navigate('/customer/products');
     } catch (error) {
       setFailedTryLogin(true);
     }
