@@ -5,6 +5,7 @@ const handleErros = require('../middlewares/handleErrors');
 const loginRoutes = require('../routes/login');
 const registerRoutes = require('../routes/register');
 const productsRoutes = require('../routes/products');
+const userRoutes = require('../routes/user');
 
 const app = express();
 
@@ -16,7 +17,7 @@ app.get('/coffeee', (_req, res) => res.status(418).end());
 
 app.use('/login', loginRoutes);
 
-app.use('/register', registerRoutes);
+app.use('/users', userRoutes);
 
 app.use('/customer/products', productsRoutes);
 

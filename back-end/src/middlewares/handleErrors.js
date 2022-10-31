@@ -5,8 +5,8 @@ const handleErros = (err, _req, res, _next) => {
   const mappedError = errorsCatalog[err.message];
 
   if (mappedError) {
-    const { statusHttp, error } = mappedError;
-    return res.status(statusHttp).json({ error });
+    const { statusHttp, message } = mappedError;
+    return res.status(statusHttp).json({ message });
   }
 
   const [code, message] = err.message.split('|');
