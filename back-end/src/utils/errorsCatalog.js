@@ -11,7 +11,7 @@ const errorsTypes = {
 
 const errorsCatalog = {
   USER_NOT_FOUND: {
-    statusHttp: statusHttp.UNAUTHORIZED,
+    statusHttp: statusHttp.NOT_FOUND,
     error: 'User not found',
   },
   INVALID_USER: {
