@@ -19,7 +19,7 @@ app.use('/login', loginRoutes);
 
 app.use('/users', userRoutes);
 
-app.use('/customer/products', productsRoutes);
+app.use('/products', productsRoutes);
 
 app.use(handleErros);
 

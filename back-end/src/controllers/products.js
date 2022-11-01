@@ -6,4 +6,6 @@ const findAll = async (_req, res) => {
   res.status(statusHttp.OK).json(allProducts);
 };
 
-module.exports = findAll;
+module.exports = {
+  findAll,
+};
