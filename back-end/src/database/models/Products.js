@@ -1,5 +1,5 @@
-const Products = (sequelize, DataTypes) => {
-  const Products = sequelize.define("Products", {
+const product = (sequelize, DataTypes) => {
+  const product = sequelize.define("product", {
       id: {
           autoIncrement: true,
           primaryKey: true,
@@ -18,7 +18,7 @@ const Products = (sequelize, DataTypes) => {
       timestamps: false,
   });
 
-  return Products;
+  return product;
 };
 
-module.exports = Products;
+module.exports = product;

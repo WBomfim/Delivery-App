@@ -7,21 +7,21 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       name: {
         allowNull: false,
         unique: true,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       price: {
         allowNull: false,
-        type: Sequelize.DECIMAL(4, 2)
+        type: Sequelize.DECIMAL(4, 2),
       },
       url_image: {
         allowNull: false,
         type: Sequelize.STRING,
-        default: ''
+        default: '',
       },
     });
 

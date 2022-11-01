@@ -23,7 +23,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       role: {
-        allowNull: true,
+        allowNull: false,
         type: Sequelize.STRING,
       },
     });

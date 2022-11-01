@@ -7,7 +7,7 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       user_id: {
         allowNull: false,
@@ -19,7 +19,7 @@ module.exports = {
           key: 'id',
         },
       },
-      saller_id: {
+      seller_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
@@ -43,7 +43,7 @@ module.exports = {
       },
       sale_date: {
         allowNull: false,
-        type: Sequelize.DATETIME,
+        type: Sequelize.DATE,
       },
       status: {
         allowNull: false,
