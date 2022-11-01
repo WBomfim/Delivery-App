@@ -14,7 +14,17 @@ const findAll = async () => {
   const allSales = await sale.findAll({
     include: ASSOCIATIONS,
   });
-  return allSales;
+
+  const formatSales = allSales.map((currSale) => {
+    const { dataValues: { products, ...rest } } = currSale;
+    const newProducts = products.map(({ dataValues: { productQuantity, ...restValues } }) => (
+      { ...restValues, quantity: productQuantity.quantity }
+    ));
+
+    return { ...rest, products: newProducts };
+  });
+
+  return formatSales;
 };
 
 module.exports = {
