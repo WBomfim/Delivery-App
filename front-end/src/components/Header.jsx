@@ -5,24 +5,24 @@ export default function Header() {
     <section>
       <button
         type="button"
-        data-testids="customer_products__element-navbar-link-products"
+        data-testid="customer_products__element-navbar-link-products"
       >
         PRODUTOS
       </button>
       <button
         type="button"
-        data-testids="customer_products__element-navbar-link-orders"
+        data-testid="customer_products__element-navbar-link-orders"
       >
         MEUS PEDIDOS
       </button>
       <p
-        data-testids="customer_products__element-navbar-user-full-name"
+        data-testid="customer_products__element-navbar-user-full-name"
       >
         Ciclano da Silva
       </p>
       <button
         type="button"
-        data-testids="customer_products__element-navbar-link-logout"
+        data-testid="customer_products__element-navbar-link-logout"
       >
         Sair
       </button>
