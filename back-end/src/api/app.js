@@ -1,6 +1,7 @@
 require('express-async-errors');
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const handleErros = require('../middlewares/handleErrors');
 const loginRoutes = require('../routes/login');
 const userRoutes = require('../routes/users');
@@ -22,6 +23,8 @@ app.use('/users', userRoutes);
 app.use('/products', productsRoutes);
 
 app.use('/sales', salesRoutes);
+
+app.use('/images', express.static(path.resolve(__dirname, 'images', 'public')));
 
 app.use(handleErros);
 
