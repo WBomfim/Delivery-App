@@ -10,7 +10,7 @@ export const requestLogin = async (rota, body) => {
 };
 
 export const requestProducts = async () => {
-  const rota = 'http://localhost:3001/customer/products';
+  const rota = 'http://localhost:3001/products';
   const { data } = await api.get(rota);
   return data;
 };
