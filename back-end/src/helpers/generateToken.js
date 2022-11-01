@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
+const fs = require('fs');
 
-// alterar para variaveis de ambiente
-const secret = 'my-secret-key';
+const jwtKey = fs.readFileSync('./jwt.evaluation.key', { encoding: 'utf-8' });
 
 const generateToken = (user) => {
   const { id, email, role } = user;
@@ -15,7 +15,7 @@ const generateToken = (user) => {
     expiresIn: '1d',
   };
 
-  const token = jwt.sign(payload, secret, config);
+  const token = jwt.sign(payload, jwtKey, config);
 
   return token;
 };

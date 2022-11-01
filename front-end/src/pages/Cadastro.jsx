@@ -24,14 +24,11 @@ export default function Redister() {
   const navigate = useNavigate();
 
   const register = async (event) => {
-    event.preventDefaul();
+    event.preventDefault();
     setFailedTryRegister(false);
     try {
-      const response = await requestRegister('/register', { name, email, password });
+      const response = await requestRegister('/users', { name, email, password });
       localStorage.setItem('userTrybeer', JSON.stringify(response));
-      if (response.role === 'customer') {
-        return navigate('customer/orders');
-      }
       return navigate('/customer/products');
     } catch (error) {
       setFailedTryRegister(true);
@@ -50,7 +47,7 @@ export default function Redister() {
             placeholder="Seu nome"
           />
         </label>
-        <labe htmlFor="email-input">
+        <label htmlFor="email-input">
           <input
             className="common_register__input-email"
             type="text"
@@ -58,8 +55,8 @@ export default function Redister() {
             onChange={ ({ target: { value } }) => { setEmail(value); } }
             placeholder="seu-email@site.com.br"
           />
-        </labe>
-        <labe htmlFor="password-input">
+        </label>
+        <label htmlFor="password-input">
           <input
             className="common_register__input-password"
             type="text"
@@ -67,7 +64,7 @@ export default function Redister() {
             onChange={ ({ target: { value } }) => { setPassword(value); } }
             placeholder="**********"
           />
-        </labe>
+        </label>
         <button
           type="submit"
           data-testid="common_register__button-register"
@@ -81,8 +78,7 @@ export default function Redister() {
         { (failedTryRegister)
           ? (
             <p data-testid="common_register__element-invalid_register">
-              { `O formato de nome, email ou senha estão incorretos. 
-              Por favor, tente novamente.`}
+              O email já está cadastrado em nosso banco de dados.
             </p>
           ) : null}
       </div>
