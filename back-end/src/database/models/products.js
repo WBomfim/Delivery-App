@@ -16,6 +16,7 @@ const product = (sequelize, DataTypes) => {
         },
   }, {
       timestamps: false,
+      underscored: true,
   });
 
   return product;
