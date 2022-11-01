@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { requestProducts } from '../services/requests';
+import CardProducts from '../components/CardProduct';
 
 export default function ProdutosClientes() {
   const [products, setProducts] = useState([]);
@@ -14,8 +15,16 @@ export default function ProdutosClientes() {
 
   return (
     <section>
-      {console.log(products)}
       <Header />
+      { products.map((ev, i) => (
+        <CardProducts
+          key={ i }
+          id={ ev.id }
+          name={ ev.name }
+          price={ ev.price.toFixed(2) }
+          urlImage={ ev.url_image }
+        />
+      )) }
     </section>
   );
 }
