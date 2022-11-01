@@ -14,7 +14,6 @@ const saleProduct = (sequelize, DataTypes) => {
     },
     { 
       timestamps: false,
-      underscored: true,
     },
   );
 

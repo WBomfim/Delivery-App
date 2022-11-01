@@ -15,6 +15,7 @@ const handleErros = (err, _req, res, _next) => {
     return res.status(Number(code)).json({ message });
   }
 
+  console.log(err);
   return res.status(StatusHttp.INTERNAL_ERROR).json({ message: 'Internal server error' });
 };
 
