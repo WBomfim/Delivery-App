@@ -6,6 +6,7 @@ import Cadastro from './pages/Cadastro';
 import Login from './pages/Login';
 import MeusPedidos from './pages/MeusPedisos';
 import ProdutosClientes from './pages/ProdutosClientes';
+import OrdersSaller from './pages/OrdersSaller';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path="/customer/orders" element={ <MeusPedidos /> } />
       <Route path="/customer/orders/:id" element={ <DetalhePedido /> } />
       <Route path="/customer/products" element={ <ProdutosClientes /> } />
+      <Route path="/seller/orders" element={ <OrdersSaller /> } />
     </Routes>
   );
 }
