@@ -21,7 +21,7 @@ export default function ProdutosClientes() {
           key={ i }
           id={ ev.id }
           name={ ev.name }
-          price={ ev.price.toFixed(2) }
+          price={ ev.price }
           urlImage={ ev.url_image }
         />
       )) }

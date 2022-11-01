@@ -12,22 +12,22 @@ export default function DetalhePedido() {
       <div>
         <div>
           <p
-            data-testids="customer_order_details__element-order-details-label-order-id"
+            data-testid="customer_order_details__element-order-details-label-order-id"
           >
             PEDIDO 0003;
           </p>
           <p
-            data-testids="customer_order_details__element-order-details-label-seller-name"
+            data-testid="customer_order_details__element-order-details-label-seller-name"
           >
             P.Vend: Fulan Pereira
           </p>
           <p
-            data-testids="customer_order_details__element-order-details-label-order-date"
+            data-testid="customer_order_details__element-order-details-label-order-date"
           >
             07/04/2021
           </p>
           <p
-            data-testids={
+            data-testid={
               `customer_order_details__element-order-details-label-delivery-status${ind}`
             }
           >
@@ -35,14 +35,14 @@ export default function DetalhePedido() {
           </p>
           <button
             type="button"
-            data-testids="customer_order_details__button-delivery-check"
+            data-testid="customer_order_details__button-delivery-check"
           >
             MARCAR COMO ENTREGUE
           </button>
         </div>
         <Table />
         <h2
-          data-testids="customer_order_details__element-order-total-price"
+          data-testid="customer_order_details__element-order-total-price"
         >
           Total: R$ 28,46
         </h2>
