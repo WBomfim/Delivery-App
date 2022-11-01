@@ -15,4 +15,9 @@ export const requestProducts = async () => {
   return data;
 };
 
+export const requestRegister = async (rota, body) => {
+  const { data } = await api.post(rota, body);
+  return data;
+};
+
 export default api;
