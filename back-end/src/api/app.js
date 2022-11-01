@@ -5,7 +5,7 @@ const handleErros = require('../middlewares/handleErrors');
 const loginRoutes = require('../routes/login');
 // const registerRoutes = require('../routes/register');
 const productsRoutes = require('../routes/products');
-const userRoutes = require('../routes/user');
+const userRoutes = require('../routes/users');
 
 const app = express();
 
