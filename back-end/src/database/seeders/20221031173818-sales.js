@@ -9,7 +9,7 @@ module.exports = {
           total_price: 33.34,
           delivery_address: 'Rua das Flores',
           delivery_number: '123',
-          sale_date: '2022-10-30 17:38:18',
+          sale_date: new Date(),
           status: 'Pendente',
         },
         {
@@ -19,7 +19,7 @@ module.exports = {
           total_price: 14.10,
           delivery_address: 'Rua das Rosas',
           delivery_number: '321',
-          sale_date: '2022-10-31 17:30:10',
+          sale_date: new Date(),
           status: 'Pendente',
         },
       ], { timestamps: false }
