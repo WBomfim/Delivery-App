@@ -1,9 +1,8 @@
-require('dotenv').config();
 const jwt = require('jsonwebtoken');
+const fs = require('fs');
 const { errorsTypes } = require('../utils/errorsCatalog');
 
-// alterar para variaveis de ambiente
-const secret = 'my-secret-key';
+const jwtKey = fs.readFileSync('./jwt.evaluation.key', { encoding: 'utf-8' });
 
 const auth = (req, _res, next) => {
   const token = req.headers.authorization;
@@ -11,7 +10,7 @@ const auth = (req, _res, next) => {
   if (!token) throw new Error(errorsTypes.TOKEN_NOT_FOUND);
 
   try {
-    const verified = jwt.verify(token, secret);
+    const verified = jwt.verify(token, jwtKey);
     req.user = verified;
     next();
   } catch (error) {
