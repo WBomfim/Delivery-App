@@ -11,7 +11,7 @@ const product = (sequelize, DataTypes) => {
       price: {
         type: DataTypes.REAL
       },
-      url_image: {
+      urlImage: {
         type: DataTypes.STRING
       },
     },
@@ -23,7 +23,7 @@ const product = (sequelize, DataTypes) => {
 
   product.associate = (models) => {
     product.hasMany(models.saleProduct, {
-      foreignKey: 'product_id',
+      foreignKey: 'productId',
       as: 'productsSale',
     });
   };

@@ -27,11 +27,11 @@ module.exports = {
           product_id: 5,
           quantity: 2,
         },
-      ], { timestamps: false }
+      ],
     );
   },
 
   down: async (queryInterface) => {
-    await queryInterface.bulkDelete('salesProducts', null, {});
+    await queryInterface.bulkDelete('saleProducts', null, {});
   },
 };

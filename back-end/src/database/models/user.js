@@ -14,18 +14,19 @@ const user = (sequelize, DataTypes) => {
       role: DataTypes.STRING,
     }, 
     { 
-      timestamps: false
+      timestamps: false,
+      underscored: true,
     },
   );
 
   user.associate = (models) => {
     user.hasMany(models.sale, {
-      foreignKey: 'user_id',
+      foreignKey: 'userId',
       as: 'salesUser',
     });
 
     user.hasMany(models.sale, {
-      foreignKey: 'seller_id',
+      foreignKey: 'sellerId',
       as: 'salesSeller',
     });
   };

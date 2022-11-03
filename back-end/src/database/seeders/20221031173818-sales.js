@@ -22,7 +22,7 @@ module.exports = {
           sale_date: new Date(),
           status: 'Pendente',
         },
-      ], { timestamps: false }
+      ],
     );
   },
 
