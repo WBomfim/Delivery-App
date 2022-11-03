@@ -14,6 +14,8 @@ export default function OrdersSaller() {
     getSales();
   }, []);
 
+  if (!sales.length) return <p>Loading...</p>;
+
   return (
     <>
       <Header />

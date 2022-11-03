@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import MeusPedidos from './pages/MeusPedisos';
 import ProdutosClientes from './pages/ProdutosClientes';
 import OrdersSaller from './pages/OrdersSaller';
+import OrderDetails from './pages/OrderDetails';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path="/customer/orders/:id" element={ <DetalhePedido /> } />
       <Route path="/customer/products" element={ <ProdutosClientes /> } />
       <Route path="/seller/orders" element={ <OrdersSaller /> } />
+      <Route path="/seller/orders/:id" element={ <OrderDetails /> } />
     </Routes>
   );
 }
