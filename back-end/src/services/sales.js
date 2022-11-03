@@ -27,6 +27,20 @@ const findAll = async () => {
   return formatSales;
 };
 
+const findById = async (id) => {
+  const saleById = await sale.findByPk(id, {
+    include: ASSOCIATIONS,
+  });
+
+  const { dataValues: { products, ...rest } } = saleById;
+  const newProducts = products.map(({ dataValues: { productQuantity, ...restValues } }) => (
+    { ...restValues, quantity: productQuantity.quantity }
+  ));
+
+  return { ...rest, products: newProducts };
+};
+
 module.exports = {
   findAll,
+  findById,
 };
