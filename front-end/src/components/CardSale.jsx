@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export default function CardSale({ sale }) {
@@ -11,8 +12,13 @@ export default function CardSale({ sale }) {
     status,
   } = sale;
 
+  const navigate = useNavigate();
+
   return (
-    <div>
+    <button
+      type="button"
+      onClick={ () => navigate(`/seller/orders/${id}`) }
+    >
       <div>
         <p>Pedido</p>
         <p data-testid={ `seller_orders__element-order-id-${id}` }>{id}</p>
@@ -37,7 +43,7 @@ export default function CardSale({ sale }) {
           </p>
         </div>
       </div>
-    </div>
+    </button>
   );
 }
 
