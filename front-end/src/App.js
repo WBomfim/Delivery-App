@@ -7,6 +7,8 @@ import Login from './pages/Login';
 import MeusPedidos from './pages/MeusPedisos';
 import ProdutosClientes from './pages/ProdutosClientes';
 import DeliveryProvider from './context/DeliveryProvider';
+import OrderDetails from './pages/OrderDetails';
+import OrdersSaller from './pages/OrdersSaller';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         <Route path="/register" element={ <Cadastro /> } />
         <Route path="/customer/orders" element={ <MeusPedidos /> } />
         <Route path="/customer/orders/:id" element={ <DetalhePedido /> } />
+        <Route path="/seller/orders" element={ <OrdersSaller /> } />
+        <Route path="/seller/orders/:id" element={ <OrderDetails /> } />
         <Route path="/customer/products" element={ <ProdutosClientes /> } />
       </Routes>
     </DeliveryProvider>

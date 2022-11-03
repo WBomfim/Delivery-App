@@ -20,4 +20,9 @@ export const requestRegister = async (rota, body) => {
   return data;
 };
 
+export const getData = async (rota) => {
+  const { data } = await api.get(rota);
+  return data;
+};
+
 export default api;

@@ -6,6 +6,13 @@ const findAll = async (_req, res) => {
   res.status(statusHttp.OK).json(allSales);
 };
 
+const findById = async (req, res) => {
+  const { id } = req.params;
+  const saleById = await salesService.findById(id);
+  res.status(statusHttp.OK).json(saleById);
+};
+
 module.exports = {
   findAll,
+  findById,
 };
