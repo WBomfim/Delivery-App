@@ -15,42 +15,42 @@ export default function SaleTable({ products }) {
       </thead>
 
       <tbody>
-        { products.map((product, index) => (
-          <tr key={ product.name }>
+        { products.map(({ id, name, quantity, price }, index) => (
+          <tr key={ name }>
             <td
               data-testid={
                 `seller_order_details__element-order-table-item-number-${index}`
               }
             >
-              {product.id}
+              { id }
             </td>
             <td
               data-testid={
                 `seller_order_details__element-order-table-name-${index}`
               }
             >
-              {product.name}
+              { name }
             </td>
             <td
               data-testid={
                 `seller_order_details__element-order-table-quantity-${index}`
               }
             >
-              {product.quantity}
+              { quantity }
             </td>
             <td
               data-testid={
                 `seller_order_details__element-order-table-unit-price-${index}`
               }
             >
-              {product.price}
+              { price }
             </td>
             <td
               data-testid={
                 `seller_order_details__element-order-table-sub-total-${index}`
               }
             >
-              {product.id}
+              { (price * quantity).toFixed(2) }
             </td>
           </tr>
         ))}

@@ -6,17 +6,19 @@ import SaleTable from '../components/SaleTable';
 
 export default function OrderDetails() {
   const [sale, setSale] = useState();
-  const { id } = useParams();
+  const { id: paramsId } = useParams();
 
   useEffect(() => {
     const getSale = async () => {
-      const response = await getData(`/sales/${id}`);
+      const response = await getData(`/sales/${paramsId}`);
       setSale(response);
     };
     getSale();
-  }, [id]);
+  }, [paramsId]);
 
   if (!sale) return <p>Loading...</p>;
+
+  const { id, saleDate, status, products, totalPrice } = sale;
 
   return (
     <>
@@ -28,17 +30,17 @@ export default function OrderDetails() {
             <p
               data-testid="seller_order_details__element-order-details-label-order-id"
             >
-              { `PEDIDO ${sale.id}` }
+              { `PEDIDO ${id}` }
             </p>
             <p
               data-testid="seller_order_details__element-order-details-label-order-date"
             >
-              { new Date(sale.sale_date).toLocaleDateString('pt-BR') }
+              { saleDate }
             </p>
             <p
               data-testid="seller_order_details__element-order-details-label-order-status"
             >
-              { sale.status }
+              { status }
             </p>
           </div>
           <div>
@@ -54,12 +56,12 @@ export default function OrderDetails() {
             </p>
           </div>
         </div>
-        <SaleTable products={ sale.products } />
+        <SaleTable products={ products } />
         <div>
           <p
             data-testid="seller_order_details__element-order-total-price"
           >
-            { `Total: R$ ${sale.total_price}` }
+            { `Total: R$ ${totalPrice}` }
           </p>
         </div>
       </section>

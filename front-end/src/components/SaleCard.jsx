@@ -1,14 +1,14 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
-export default function CardSale({ sale }) {
+export default function SaleCard({ sale }) {
   const {
     id,
-    total_price: totalPrice,
-    delivery_address: deliveryAddress,
-    delivery_number: deliveryNumber,
-    sale_date: saleDate,
+    totalPrice,
+    deliveryAddress,
+    deliveryNumber,
+    saleDate,
     status,
   } = sale;
 
@@ -21,25 +21,27 @@ export default function CardSale({ sale }) {
     >
       <div>
         <p>Pedido</p>
-        <p data-testid={ `seller_orders__element-order-id-${id}` }>{id}</p>
+        <p data-testid={ `seller_orders__element-order-id-${id}` }>{ id }</p>
       </div>
       <div>
         <div>
           <div>
-            <p data-testid={ `seller_orders__element-delivery-status-${id}` }>{status}</p>
+            <p data-testid={ `seller_orders__element-delivery-status-${id}` }>
+              { status }
+            </p>
           </div>
           <div>
             <p data-testid={ `seller_orders__element-order-date-${id}` }>
-              {new Date(saleDate).toLocaleDateString('pt-BR')}
+              { saleDate }
             </p>
             <p data-testid={ `seller_orders__element-card-price-${id}` }>
-              {`R$ ${totalPrice}`}
+              { `R$ ${totalPrice}` }
             </p>
           </div>
         </div>
         <div>
           <p data-testid={ `seller_orders__element-card-address-${id}` }>
-            {`${deliveryAddress}, ${deliveryNumber}`}
+            { `${deliveryAddress}, ${deliveryNumber}` }
           </p>
         </div>
       </div>
@@ -47,13 +49,13 @@ export default function CardSale({ sale }) {
   );
 }
 
-CardSale.propTypes = {
+SaleCard.propTypes = {
   sale: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    total_price: PropTypes.string.isRequired,
-    delivery_address: PropTypes.string.isRequired,
-    delivery_number: PropTypes.string.isRequired,
-    sale_date: PropTypes.string.isRequired,
+    totalPrice: PropTypes.string.isRequired,
+    deliveryAddress: PropTypes.string.isRequired,
+    deliveryNumber: PropTypes.string.isRequired,
+    saleDate: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
   }).isRequired,
 };
