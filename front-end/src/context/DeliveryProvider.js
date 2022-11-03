@@ -1,27 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import DeliveryContext from './DeliveryContext';
 
-function RecipesProvider({ children }) {
+function DeliveryProvider({ children }) {
   const [productsCarShop, setProductsCarShop] = useState([]);
+  const [totalValue, setTotalValue] = useState(0);
 
-  const contextValue = {
+  useEffect(() => {
+    let total = 0;
+    productsCarShop.forEach((ev) => {
+      total += ev.totalPrice;
+    });
+    setTotalValue(total);
+  }, [productsCarShop]);
+
+  const contextValue = useMemo(() => ({
     productsCarShop,
     setProductsCarShop,
-  };
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const contextValueUse = useMemo(() => (contextValue), []);
+    totalValue,
+    setTotalValue,
+  }), [productsCarShop, totalValue]);
 
   return (
-    <DeliveryContext.Provider value={ contextValueUse }>
+    <DeliveryContext.Provider value={ contextValue }>
       { children }
     </DeliveryContext.Provider>
   );
 }
 
-RecipesProvider.propTypes = {
+DeliveryProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default RecipesProvider;
+export default DeliveryProvider;

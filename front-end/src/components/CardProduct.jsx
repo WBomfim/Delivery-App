@@ -1,7 +1,53 @@
-import React from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import DeliveryContext from '../context/DeliveryContext';
 
 export default function CardProducts({ id, name, price, urlImage }) {
+  const [quantyProduct, setquantyProduct] = useState(0);
+  const { productsCarShop, setProductsCarShop } = useContext(DeliveryContext);
+
+  useEffect(() => {
+    if (quantyProduct > 0) {
+      const verificaProduct = productsCarShop.some((ev) => ev.idProduct === id);
+      if (verificaProduct) {
+        setProductsCarShop(productsCarShop.map((ev) => {
+          if (ev.idProduct === id) {
+            ev.quanty = quantyProduct;
+            ev.totalPrice = quantyProduct * ev.unitPrice;
+          }
+          return ev;
+        }));
+      } else {
+        setProductsCarShop([...productsCarShop, {
+          idProduct: id,
+          nameProduct: name,
+          unitPrice: price,
+          quanty: quantyProduct,
+          totalPrice: quantyProduct * Number(price),
+        }]);
+      }
+    } else {
+      const verificaProduct = productsCarShop.some((ev) => ev.idProduct === id);
+      if (verificaProduct) {
+        setProductsCarShop(productsCarShop.filter((ev) => ev.idProduct !== id));
+      }
+    }
+  }, [quantyProduct]);
+
+  const removeItem = () => {
+    if (quantyProduct > 0) {
+      setquantyProduct(quantyProduct - 1);
+    }
+  };
+
+  const addItem = () => {
+    setquantyProduct(quantyProduct + 1);
+  };
+
+  const digitarQuanty = ({ target }) => {
+    setquantyProduct(Number(target.value));
+  };
+
   return (
     <div>
       <section data-testid={ `customer_products__element-card-price-${id}` }>
@@ -22,16 +68,19 @@ export default function CardProducts({ id, name, price, urlImage }) {
         <button
           data-testid={ `customer_products__button-card-rm-item-${id}` }
           type="button"
+          onClick={ removeItem }
         >
           -
         </button>
         <input
-          defaultValue="0"
+          value={ quantyProduct }
+          onChange={ digitarQuanty }
           data-testid={ `customer_products__input-card-quantity-${id}` }
         />
         <button
           data-testid={ `customer_products__button-card-add-item-${id}` }
           type="button"
+          onClick={ addItem }
         >
           +
         </button>

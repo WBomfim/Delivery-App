@@ -25,7 +25,7 @@ export default function Login() {
     setFailedTryLogin(false);
     try {
       const response = await requestLogin('/login', { email, password });
-      localStorage.setItem('userTrybeer', JSON.stringify(response));
+      localStorage.setItem('user', JSON.stringify(response));
       if (response.role === 'seller') {
         return navigate('/seller/orders');
       }

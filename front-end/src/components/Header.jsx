@@ -1,42 +1,54 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Header() {
-  const { pathname } = useLocation();
-  const location = pathname.split('/')[1];
-  const { name } = JSON.parse(localStorage.getItem('userTrybeer'));
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [nameUser, setNameUser] = useState('');
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) {
+      setNameUser('Ciclano da Silva');
+    } else {
+      setNameUser(user.name);
+    }
+  }, []);
+
+  const logoutBtn = () => {
+    localStorage.clear();
+    navigate('/');
+  };
+
+  const redirectProdutos = () => navigate('/customer/products');
+
+  const redirectMeusPedidos = () => navigate('/customer/orders');
 
   return (
     <section>
-      {
-        location !== 'seller' ? (
-          <button
-            type="button"
-            data-testid="customer_products__element-navbar-link-products"
-          >
-            PRODUTOS
-          </button>
-        ) : null
-      }
-
+      <button
+        type="button"
+        data-testid="customer_products__element-navbar-link-products"
+        onClick={ redirectProdutos }
+      >
+        PRODUTOS
+      </button>
       <button
         type="button"
         data-testid="customer_products__element-navbar-link-orders"
+        onClick={ redirectMeusPedidos }
       >
-        { location === 'seller' ? 'PEDIDOS' : 'MEUS PEDIDOS' }
+        { location.pathname === 'seller' ? 'PEDIDOS' : 'MEUS PEDIDOS' }
       </button>
-
-      <div>
-        <p
-          data-testid="customer_products__element-navbar-user-full-name"
-        >
-          { name }
-        </p>
-      </div>
-
+      <p
+        data-testid="customer_products__element-navbar-user-full-name"
+      >
+        { nameUser }
+      </p>
       <button
         type="button"
         data-testid="customer_products__element-navbar-link-logout"
+        onClick={ logoutBtn }
       >
         Sair
       </button>
