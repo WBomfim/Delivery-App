@@ -32,6 +32,7 @@ export default function CardProducts({ id, name, price, urlImage }) {
         setProductsCarShop(productsCarShop.filter((ev) => ev.idProduct !== id));
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [quantyProduct]);
 
   const removeItem = () => {

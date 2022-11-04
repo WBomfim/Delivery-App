@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
-// import Header from '../components/Header';
+import Header from '../components/Header';
 import DeliveryContext from '../context/DeliveryContext';
 import CheckoutItem from '../components/CheckoutItem';
-import CardProduct from '../components/CardProduct';
 
 function Checkout() {
   // const products = [
@@ -17,6 +16,7 @@ function Checkout() {
   const { productsCarShop, totalValue } = useContext(DeliveryContext);
   return (
     <main>
+      <Header />
       <table>
         <thead>
           <tr>
@@ -31,9 +31,15 @@ function Checkout() {
         <tbody>
 
           {productsCarShop.map((product, index) => (<CheckoutItem
-            key={ product.id }
-            product={ product }
+            key={ index }
             index={ index }
+            idProduct={ product.idProduct }
+            nameProduct={ product.nameProduct }
+            unitPrice={ Number(product.unitPrice)
+              .toFixed(2).toString().replace('.', ',') }
+            quanty={ product.quanty }
+            totalPrice={ Number(product.totalPrice)
+              .toFixed(2).toString().replace('.', ',') }
           />))}
         </tbody>
 
@@ -41,10 +47,9 @@ function Checkout() {
       <p
         data-testid="customer_checkout__element-order-total-price"
       >
-        {`Total: ${(totalValue)}`}
+        {`Total: ${(totalValue.toFixed(2).toString().replace('.', ','))}`}
 
       </p>
-      <CardProduct />
     </main>
   );
 }

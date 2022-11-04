@@ -33,7 +33,7 @@ export default function ProdutosClientes() {
           id={ ev.id }
           name={ ev.name }
           price={ ev.price }
-          urlImage={ ev.url_image }
+          urlImage={ ev.urlImage }
         />
       )) }
 
