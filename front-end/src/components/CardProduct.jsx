@@ -53,7 +53,7 @@ export default function CardProducts({ id, name, price, urlImage }) {
     <div>
       <section data-testid={ `customer_products__element-card-price-${id}` }>
         {/* referencia site https://www.devmedia.com.br/forum/trocar-ponto-por-virgula-javascript/551468#:~:text=Para%20isso%2C%20altere%20utilize%20o,toString(). */}
-        { Number(price).toString().replace('.', ',') }
+        { price.toFixed(2).toString().replace('.', ',') }
       </section>
       <section>
         <img
