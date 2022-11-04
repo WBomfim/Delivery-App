@@ -9,6 +9,7 @@ import ProdutosClientes from './pages/ProdutosClientes';
 import DeliveryProvider from './context/DeliveryProvider';
 import OrderDetails from './pages/OrderDetails';
 import OrdersSaller from './pages/OrdersSaller';
+import Checkout from './pages/Checkout';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/seller/orders" element={ <OrdersSaller /> } />
         <Route path="/seller/orders/:id" element={ <OrderDetails /> } />
         <Route path="/customer/products" element={ <ProdutosClientes /> } />
+        <Route path="/customer/checkout" element={ <Checkout /> } />
       </Routes>
     </DeliveryProvider>
   );
