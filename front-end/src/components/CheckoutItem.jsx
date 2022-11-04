@@ -1,47 +1,48 @@
-// import React, { useContext } from 'react';
-import propTypes from 'prop-types';
-// import cartContext from '../../context/UserCheckoutItem';
+import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
+import DeliveryContext from '../context/DeliveryContext';
 
-function UserCheckoutItem({ product, index }) {
-  // const { removeProductFromCart } = useContext(cartContext);
+function UserCheckoutItem({
+  index, idProduct, nameProduct, unitPrice, quanty, totalPrice }) {
+  const { removeProductFromCart } = useContext(DeliveryContext);
   return (
 
     <tr>
       <td
         data-testid={ `customer_checkout__element-order-table-item-number-${index}` }
       >
-        {index + 1}
+        { index + 1 }
 
       </td>
       <td
         data-testid={ `customer_checkout__element-order-table-name-${index}` }
       >
-        {product.name}
+        { nameProduct }
 
       </td>
       <td
         data-testid={ `customer_checkout__element-order-table-quantity-${index}` }
       >
-        {product.quantity}
+        { quanty }
 
       </td>
       <td
         data-testid={ `customer_checkout__element-order-table-unit-price-${index}` }
       >
-        {product.price}
+        { unitPrice }
 
       </td>
       <td
         data-testid={ `customer_checkout__element-order-table-sub-total-${index}` }
       >
-        {(product.price * product.quantity)}
+        { totalPrice }
 
       </td>
       <td>
         <button
           data-testid={ `customer_checkout__element-order-table-remove-${index}` }
           type="button"
-          onClick={ () => { removeProductFromCart(product); } }
+          onClick={ () => removeProductFromCart(idProduct) }
         >
           Remover
 
@@ -53,13 +54,12 @@ function UserCheckoutItem({ product, index }) {
   );
 }
 
-export default UserCheckoutItem;
-
 UserCheckoutItem.propTypes = {
-  product: propTypes.shape({
-    quantity: propTypes.number,
-    price: propTypes.string,
-    name: propTypes.string,
-  }).isRequired,
-  index: propTypes.number.isRequired,
-};
+  idProduct: PropTypes.number,
+  nameProduct: PropTypes.string,
+  quanty: PropTypes.string,
+  unitPrice: PropTypes.number,
+  totalPrice: PropTypes.number,
+}.isRequired;
+
+export default UserCheckoutItem;
