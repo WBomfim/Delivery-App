@@ -9,14 +9,14 @@ export const requestLogin = async (rota, body) => {
   return data;
 };
 
-export const requestProducts = async () => {
-  const rota = 'http://localhost:3001/products';
-  const { data } = await api.get(rota);
+export const requestRegister = async (rota, body) => {
+  const { data } = await api.post(rota, body);
   return data;
 };
 
-export const requestRegister = async (rota, body) => {
-  const { data } = await api.post(rota, body);
+export const requestProducts = async () => {
+  const rota = 'http://localhost:3001/products';
+  const { data } = await api.get(rota);
   return data;
 };
 
