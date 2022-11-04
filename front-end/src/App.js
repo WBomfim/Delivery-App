@@ -4,7 +4,7 @@ import './App.css';
 import DetalhePedido from './pages/DetalhePedido';
 import Cadastro from './pages/Cadastro';
 import Login from './pages/Login';
-import MeusPedidos from './pages/MeusPedisos';
+import MeusPedidos from './pages/MeusPedidos';
 import ProdutosClientes from './pages/ProdutosClientes';
 import DeliveryProvider from './context/DeliveryProvider';
 import OrderDetails from './pages/OrderDetails';
