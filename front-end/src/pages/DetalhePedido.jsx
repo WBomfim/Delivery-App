@@ -1,10 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Header from '../components/Header';
 import Table from '../components/Table';
+import { requestDetails } from '../services/requests';
 
 export default function DetalhePedido() {
   const [ind] = useState();
+  const [details, setDetails] = useState();
+  const location = useLocation();
 
+  useEffect(() => {
+    const getDetails = async () => {
+      const id = location.pathname.split('/');
+      const request = await requestDetails(id[3]);
+      setDetails(request);
+    };
+    getDetails();
+  });
+
+  // console.log(details);
   return (
     <section>
       <Header />
