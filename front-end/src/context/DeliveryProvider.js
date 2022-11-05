@@ -14,11 +14,17 @@ function DeliveryProvider({ children }) {
     setTotalValue(total);
   }, [productsCarShop]);
 
+  const removeProductFromCart = (id) => {
+    setProductsCarShop(productsCarShop.filter((ev) => ev.idProduct !== id));
+  };
+
   const contextValue = useMemo(() => ({
     productsCarShop,
     setProductsCarShop,
     totalValue,
     setTotalValue,
+    removeProductFromCart,
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }), [productsCarShop, totalValue]);
 
   return (

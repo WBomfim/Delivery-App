@@ -1,39 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import CardMeuPedidos from '../components/CardMeuPedido';
 import Header from '../components/Header';
+import { getData } from '../services/requests';
 
 export default function MeusPedidos() {
-  const [produtos, setProdutos] = useState([]);
+  const [sales, setSales] = useState([]);
 
   useEffect(() => {
-    setProdutos([
-      {
-        id: 1,
-        status: 'PENDENTE',
-        data: '28/04/21',
-        price: 23.80,
-      },
-      {
-        id: 2,
-        status: 'Preparando',
-        data: '08/04/21',
-        price: 14.20,
-      },
-    ]);
-  }, [setProdutos]);
+    const getSales = async () => {
+      setSales(await getData('http://localhost:3001/sales'));
+    };
+    getSales();
+  }, []);
 
   return (
     <section>
       <Header />
       {
-        produtos.map(({ id, status, data, price }) => (
+        sales.map(({ id, status, saleDate, totalPrice }) => (
           <CardMeuPedidos
             key={ id }
-            cardId={ id }
             id={ id }
             status={ status }
-            data={ data }
-            price={ price }
+            data={ saleDate }
+            price={ totalPrice }
           />
         ))
       }

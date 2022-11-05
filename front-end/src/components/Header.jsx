@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Header() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [nameUser, setNameUser] = useState('');
 
   useEffect(() => {
@@ -37,7 +38,7 @@ export default function Header() {
         data-testid="customer_products__element-navbar-link-orders"
         onClick={ redirectMeusPedidos }
       >
-        MEUS PEDIDOS
+        { location.pathname === 'seller' ? 'PEDIDOS' : 'MEUS PEDIDOS' }
       </button>
       <p
         data-testid="customer_products__element-navbar-user-full-name"

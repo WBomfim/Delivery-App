@@ -32,8 +32,8 @@ export default function ProdutosClientes() {
           key={ i }
           id={ ev.id }
           name={ ev.name }
-          price={ ev.price }
-          urlImage={ ev.url_image }
+          price={ Number(ev.price) }
+          urlImage={ ev.urlImage }
         />
       )) }
 
