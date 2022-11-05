@@ -16,7 +16,7 @@ export default function DetalhePedido() {
       setDetails(request);
     };
     getDetails();
-  }, []);
+  });
 
   // console.log(details);
   return (
