@@ -1,5 +1,9 @@
-const { user, sale, product } = require('../database/models');
+const Sequilize = require('sequelize');
+const { user, sale, product, saleProduct } = require('../database/models');
 const formatSalesData = require('../helpers/formatSalesData');
+const { development, test, production } = require('../database/config/config');
+
+const sequelize = new Sequilize(development || test || production);
 
 const ASSOCIATIONS = [
   { model: user, as: 'user', attributes: { exclude: ['id', 'password', 'role'] } },
@@ -30,7 +34,32 @@ const findById = async (id) => {
   return formatedSale;
 };
 
+const addSale = async (userId, saleData) => {
+  const newSale = await sequelize.transaction(async (transaction) => {
+    const { products, ...saleInfo } = saleData;
+    const saleDate = new Date();
+    const status = 'Pendente';
+
+    const addNewSale = await sale.create({
+      ...saleInfo,
+      userId,
+      saleDate,
+      status,
+    }, { transaction });
+
+    const insertProducts = products.map(({ productId, quantity }) => ({
+      saleId: addNewSale.id, productId, quantity,
+    }));
+    await saleProduct.bulkCreate(insertProducts, { transaction });
+
+    return addNewSale;
+  });
+
+  return newSale;
+};
+
 module.exports = {
   findAll,
   findById,
+  addSale,
 };

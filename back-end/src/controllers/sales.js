@@ -12,7 +12,15 @@ const findById = async (req, res) => {
   res.status(statusHttp.OK).json(saleById);
 };
 
+const addSale = async (req, res) => {
+  const { id: userId } = req.user;
+  const { body } = req;
+  const newSale = await salesService.addSale(userId, body);
+  res.status(statusHttp.CREATED).json(newSale);
+};
+
 module.exports = {
   findAll,
   findById,
+  addSale,
 };

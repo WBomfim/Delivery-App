@@ -9,7 +9,7 @@ const sale = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         foreignKey: true,
       },
-      sellerId: {
+      sallerId: {
         type: DataTypes.INTEGER,
         foreignKey: true,
       },

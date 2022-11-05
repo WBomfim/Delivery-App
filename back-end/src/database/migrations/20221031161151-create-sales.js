@@ -19,7 +19,7 @@ module.exports = {
           key: 'id',
         },
       },
-      seller_id: {
+      saller_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',

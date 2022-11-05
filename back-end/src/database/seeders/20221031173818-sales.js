@@ -5,7 +5,7 @@ module.exports = {
         {
           id: 1,
           user_id: 3,
-          seller_id: 2,
+          saller_id: 2,
           total_price: 39.38,
           delivery_address: 'Rua das Flores',
           delivery_number: '123',
@@ -15,7 +15,7 @@ module.exports = {
         {
           id: 2,
           user_id: 3,
-          seller_id: 2,
+          saller_id: 2,
           total_price: 19.38,
           delivery_address: 'Rua das Rosas',
           delivery_number: '321',
