@@ -39,7 +39,13 @@ const addUser = async (name, email, password) => {
   };
 };
 
+const getSallers = async () => {
+  const sallers = await user.findAll({ where: { role: 'seller' } });
+  return sallers.map(({ id, name }) => ({ id, name }));
+};
+
 module.exports = {
   login,
   addUser,
+  getSallers,
 };
