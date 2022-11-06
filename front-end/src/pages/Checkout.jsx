@@ -25,11 +25,11 @@ function Checkout() {
             <CheckoutItem
               key={ index }
               index={ index }
-              idProduct={ product.productId }
+              productId={ product.productId }
               nameProduct={ product.nameProduct }
               unitPrice={ Number(product.unitPrice)
                 .toFixed(2).toString().replace('.', ',') }
-              quanty={ product.quantity }
+              quantity={ product.quantity }
               totalPrice={ Number(product.totalPrice)
                 .toFixed(2).toString().replace('.', ',') }
             />

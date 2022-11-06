@@ -4,25 +4,25 @@ import DeliveryContext from '../context/DeliveryContext';
 import { getData, setToken, requestRegister } from '../services/requests';
 
 export default function CheckoutFinish() {
-  const [saller, setSaller] = useState();
+  const [seller, setSeller] = useState();
   const [address, setAddress] = useState();
   const [numberAddress, setNumberAddress] = useState();
-  const [sallers, setSallers] = useState([]);
+  const [sellers, setSellers] = useState([]);
   const { productsCarShop, totalValue } = useContext(DeliveryContext);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const getSallers = async () => {
-      const response = await getData('/users/sallers');
-      setSallers(response);
+      const response = await getData('/users/sellers');
+      setSellers(response);
     };
     getSallers();
   }, []);
 
   const finishSale = async () => {
     const saleData = {
-      sallerId: saller,
+      sellerId: seller,
       totalPrice: totalValue,
       deliveryAddress: address,
       deliveryNumber: numberAddress,
@@ -44,12 +44,12 @@ export default function CheckoutFinish() {
           P. Vendedor Responsável:
           <select
             id="saller"
-            value={ saller }
-            onChange={ ({ target: { value } }) => setSaller(value) }
+            value={ seller }
+            onChange={ ({ target: { value } }) => setSeller(value) }
             data-testid="customer_checkout__select-seller"
           >
             <option value="">Selecione um Vendedor</option>
-            {sallers.map((currSaller) => (
+            {sellers.map((currSaller) => (
               <option key={ currSaller.id } value={ currSaller.id }>
                 {currSaller.name}
               </option>
