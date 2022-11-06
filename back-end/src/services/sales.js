@@ -1,5 +1,5 @@
 const Sequilize = require('sequelize');
-const { user, sale, product, saleProduct } = require('../database/models');
+const { user, sale, product, salesProduct } = require('../database/models');
 const formatSalesData = require('../helpers/formatSalesData');
 const { development, test, production } = require('../database/config/config');
 
@@ -50,7 +50,7 @@ const addSale = async (userId, saleData) => {
     const insertProducts = products.map(({ productId, quantity }) => ({
       saleId: addNewSale.id, productId, quantity,
     }));
-    await saleProduct.bulkCreate(insertProducts, { transaction });
+    await salesProduct.bulkCreate(insertProducts, { transaction });
 
     return addNewSale;
   });

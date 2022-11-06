@@ -13,13 +13,13 @@ const addUser = async (req, res) => {
   res.status(statusHttp.CREATED).json(result);
 };
 
-const getSallers = async (_req, res) => {
-  const result = await userService.getSallers();
+const getSellers = async (_req, res) => {
+  const result = await userService.getSellers();
   res.status(statusHttp.OK).json(result);
 };
 
 module.exports = {
   login,
   addUser,
-  getSallers,
+  getSellers,
 };
