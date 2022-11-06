@@ -1,24 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
-import Table from '../components/Table';
+import OrderDatailTable from '../components/OrderDatailTable';
 import { requestDetails } from '../services/requests';
 
 export default function DetalhePedido() {
-  const [ind] = useState();
   const [details, setDetails] = useState();
-  const location = useLocation();
+  const { id: paramsId } = useParams();
 
   useEffect(() => {
     const getDetails = async () => {
-      const id = location.pathname.split('/');
-      const request = await requestDetails(id[3]);
+      const request = await requestDetails('/sales', paramsId);
       setDetails(request);
     };
     getDetails();
-  });
+  }, [paramsId]);
 
-  // console.log(details);
+  if (!details) return <p>Loading...</p>;
+
+  const {
+    id,
+    seller,
+    saleDate,
+    totalPrice,
+    status,
+    products,
+  } = details;
+
   return (
     <section>
       <Header />
@@ -28,38 +36,42 @@ export default function DetalhePedido() {
           <p
             data-testid="customer_order_details__element-order-details-label-order-id"
           >
-            PEDIDO 0003;
+            {`PEDIDO ${id}`}
           </p>
           <p
             data-testid="customer_order_details__element-order-details-label-seller-name"
           >
-            P.Vend: Fulan Pereira
+            {`P. Vend: ${seller.name}`}
           </p>
           <p
             data-testid="customer_order_details__element-order-details-label-order-date"
           >
-            07/04/2021
+            { saleDate }
           </p>
           <p
             data-testid={
-              `customer_order_details__element-order-details-label-delivery-status${ind}`
+              `customer_order_details__element-order-details-label-delivery-status${id}`
             }
           >
-            ENTREGUE
+            { status }
           </p>
           <button
             type="button"
+            disabled={ status !== 'Entregue' }
             data-testid="customer_order_details__button-delivery-check"
           >
             MARCAR COMO ENTREGUE
           </button>
         </div>
-        <Table />
-        <h2
-          data-testid="customer_order_details__element-order-total-price"
-        >
-          Total: R$ 28,46
-        </h2>
+        <OrderDatailTable products={ products } />
+        <div>
+          <span>TOTAL: R$ </span>
+          <span
+            data-testid="customer_order_details__element-order-total-price"
+          >
+            { totalPrice.toString().replace('.', ',') }
+          </span>
+        </div>
       </div>
     </section>
   );
