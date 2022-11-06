@@ -38,22 +38,27 @@ export default function OrderDetails() {
               { saleDate }
             </p>
             <p
-              data-testid="seller_order_details__element-order-details-label-order-status"
+              // eslint-disable-next-line max-len
+              data-testid="seller_order_details__element-order-details-label-delivery-status"
             >
               { status }
             </p>
           </div>
           <div>
-            <p
+            <button
+              type="button"
+              disabled={ status !== 'Pendente' }
               data-testid="seller_order_details__button-preparing-check"
             >
               PREPARAR PEDIDO
-            </p>
-            <p
+            </button>
+            <button
+              type="button"
+              disabled={ status !== 'Preparando' }
               data-testid="seller_order_details__button-dispatch-check"
             >
               SAIU PARA ENTREGA
-            </p>
+            </button>
           </div>
         </div>
         <SaleTable products={ products } />
@@ -61,7 +66,7 @@ export default function OrderDetails() {
           <p
             data-testid="seller_order_details__element-order-total-price"
           >
-            { `Total: R$ ${totalPrice}` }
+            { totalPrice.toString().replace('.', ',') }
           </p>
         </div>
       </section>
