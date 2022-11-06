@@ -16,7 +16,7 @@ export default function CardMeuPedidos({ id, status, data, price }) {
         { data }
       </h4>
       <h4 data-testid={ `customer_orders__element-card-price-${id}` }>
-        { `R$ ${price}` }
+        { price.toString().replace('.', ',') }
       </h4>
     </Link>
   );
