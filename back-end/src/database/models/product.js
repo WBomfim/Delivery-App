@@ -22,9 +22,9 @@ const product = (sequelize, DataTypes) => {
   );
 
   product.associate = (models) => {
-    product.hasMany(models.saleProduct, {
+    product.hasMany(models.salesProduct, {
       foreignKey: 'productId',
-      as: 'productsSale',
+      as: 'productsSales',
     });
   };
 
