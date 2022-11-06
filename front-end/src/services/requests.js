@@ -4,6 +4,10 @@ const api = axios.create({
   baseURL: 'http://localhost:3001',
 });
 
+export const setToken = (token) => {
+  api.defaults.headers.common.Authorization = token;
+};
+
 export const requestLogin = async (rota, body) => {
   const { data } = await api.post(rota, body);
   return data;

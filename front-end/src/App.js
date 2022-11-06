@@ -18,12 +18,12 @@ function App() {
         <Route exact path="/" element={ <Navigate to="/login" /> } />
         <Route path="/login" element={ <Login /> } />
         <Route path="/register" element={ <Cadastro /> } />
+        <Route path="/customer/products" element={ <ProdutosClientes /> } />
+        <Route path="/customer/checkout" element={ <Checkout /> } />
         <Route path="/customer/orders" element={ <MeusPedidos /> } />
         <Route path="/customer/orders/:id" element={ <DetalhePedido /> } />
         <Route path="/seller/orders" element={ <OrdersSaller /> } />
         <Route path="/seller/orders/:id" element={ <OrderDetails /> } />
-        <Route path="/customer/products" element={ <ProdutosClientes /> } />
-        <Route path="/customer/checkout" element={ <Checkout /> } />
       </Routes>
     </DeliveryProvider>
   );
