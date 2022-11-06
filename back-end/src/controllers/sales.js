@@ -19,8 +19,16 @@ const addSale = async (req, res) => {
   res.status(statusHttp.CREATED).json(newSale);
 };
 
+const updateSaleStatus = async (req, res) => {
+  const { id } = req.params;
+  const { body } = req;
+  const updatedSale = await salesService.updateSaleStatus(Number(id), body);
+  res.status(statusHttp.OK).json(updatedSale);
+};
+
 module.exports = {
   findAll,
   findById,
   addSale,
+  updateSaleStatus,
 };

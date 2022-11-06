@@ -8,4 +8,6 @@ router.get('/:id', salesController.findById);
 
 router.post('/', auth, salesController.addSale);
 
+router.patch('/:id', auth, salesController.updateSaleStatus);
+
 module.exports = router;
