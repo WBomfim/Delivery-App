@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import OrderDatailTable from '../components/OrderDatailTable';
-import { requestDetails } from '../services/requests';
+import { requestDetails, requestUpdate, setToken } from '../services/requests';
 
 export default function DetalhePedido() {
   const [details, setDetails] = useState();
@@ -15,6 +15,13 @@ export default function DetalhePedido() {
     };
     getDetails();
   }, [paramsId]);
+
+  const deliveredSale = async () => {
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    setToken(token);
+    const updatedSale = await requestUpdate('/sales', paramsId, { status: 'Entregue' });
+    setDetails(updatedSale);
+  };
 
   if (!details) return <p>Loading...</p>;
 
@@ -57,7 +64,8 @@ export default function DetalhePedido() {
           </p>
           <button
             type="button"
-            disabled={ status !== 'Entregue' }
+            disabled={ status !== 'Em Trânsito' }
+            onClick={ deliveredSale }
             data-testid="customer_order_details__button-delivery-check"
           >
             MARCAR COMO ENTREGUE
