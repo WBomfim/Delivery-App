@@ -5,6 +5,7 @@ export default function Header() {
   const navigate = useNavigate();
   const location = useLocation();
   const [nameUser, setNameUser] = useState('');
+  const userType = location.pathname.split('/')[1];
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -22,23 +23,27 @@ export default function Header() {
 
   const redirectProdutos = () => navigate('/customer/products');
 
-  const redirectMeusPedidos = () => navigate('/customer/orders');
+  const redirectMeusPedidos = () => navigate(
+    userType === 'seller' ? '/seller/orders' : '/customer/orders',
+  );
 
   return (
     <section>
-      <button
-        type="button"
-        data-testid="customer_products__element-navbar-link-products"
-        onClick={ redirectProdutos }
-      >
-        PRODUTOS
-      </button>
+      { userType === 'customer' && (
+        <button
+          type="button"
+          data-testid="customer_products__element-navbar-link-products"
+          onClick={ redirectProdutos }
+        >
+          PRODUTOS
+        </button>
+      )}
       <button
         type="button"
         data-testid="customer_products__element-navbar-link-orders"
         onClick={ redirectMeusPedidos }
       >
-        { location.pathname === 'seller' ? 'PEDIDOS' : 'MEUS PEDIDOS' }
+        { userType === 'seller' ? 'PEDIDOS' : 'MEUS PEDIDOS' }
       </button>
       <p
         data-testid="customer_products__element-navbar-user-full-name"
