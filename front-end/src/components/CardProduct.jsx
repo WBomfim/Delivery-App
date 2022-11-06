@@ -8,28 +8,28 @@ export default function CardProducts({ id, name, price, urlImage }) {
 
   useEffect(() => {
     if (quantyProduct > 0) {
-      const verificaProduct = productsCarShop.some((ev) => ev.idProduct === id);
+      const verificaProduct = productsCarShop.some((ev) => ev.productId === id);
       if (verificaProduct) {
         setProductsCarShop(productsCarShop.map((ev) => {
-          if (ev.idProduct === id) {
-            ev.quanty = quantyProduct;
+          if (ev.productId === id) {
+            ev.quantity = quantyProduct;
             ev.totalPrice = quantyProduct * ev.unitPrice;
           }
           return ev;
         }));
       } else {
         setProductsCarShop([...productsCarShop, {
-          idProduct: id,
+          productId: id,
           nameProduct: name,
           unitPrice: price,
-          quanty: quantyProduct,
+          quantity: quantyProduct,
           totalPrice: quantyProduct * Number(price),
         }]);
       }
     } else {
-      const verificaProduct = productsCarShop.some((ev) => ev.idProduct === id);
+      const verificaProduct = productsCarShop.some((ev) => ev.productId === id);
       if (verificaProduct) {
-        setProductsCarShop(productsCarShop.filter((ev) => ev.idProduct !== id));
+        setProductsCarShop(productsCarShop.filter((ev) => ev.productId !== id));
       }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
