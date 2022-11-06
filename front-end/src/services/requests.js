@@ -35,4 +35,10 @@ export const requestDetails = async (rota, id) => {
   return data;
 };
 
+export const requestUpdate = async (rota, id, body) => {
+  const url = `${rota}/${id}`;
+  const { data } = await api.patch(url, body);
+  return data;
+};
+
 export default api;

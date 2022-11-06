@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getData } from '../services/requests';
+import { getData, requestUpdate, setToken } from '../services/requests';
 import Header from '../components/Header';
 import SaleTable from '../components/SaleTable';
 
@@ -15,6 +15,22 @@ export default function OrderDetails() {
     };
     getSale();
   }, [paramsId]);
+
+  const prepareSale = async () => {
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    setToken(token);
+    const updatedSale = await requestUpdate('/sales', paramsId, { status: 'Preparando' });
+    setSale(updatedSale);
+  };
+
+  const sendSale = async () => {
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    setToken(token);
+    const updatedSale = await requestUpdate('/sales', paramsId, {
+      status: 'Em Trânsito',
+    });
+    setSale(updatedSale);
+  };
 
   if (!sale) return <p>Loading...</p>;
 
@@ -48,6 +64,7 @@ export default function OrderDetails() {
             <button
               type="button"
               disabled={ status !== 'Pendente' }
+              onClick={ prepareSale }
               data-testid="seller_order_details__button-preparing-check"
             >
               PREPARAR PEDIDO
@@ -55,6 +72,7 @@ export default function OrderDetails() {
             <button
               type="button"
               disabled={ status !== 'Preparando' }
+              onClick={ sendSale }
               data-testid="seller_order_details__button-dispatch-check"
             >
               SAIU PARA ENTREGA
