@@ -6,6 +6,7 @@ const errorsTypes = {
   INVALID_PASSWORD: 'INVALID_PASSWORD',
   TOKEN_NOT_FOUND: 'TOKEN_NOT_FOUND',
   INVALID_TOKEN: 'INVALID_TOKEN',
+  PROPERTY_INVALID: 'PROPERTY_INVALID',
 };
 
 const errorsCatalog = {
@@ -28,6 +29,10 @@ const errorsCatalog = {
   INVALID_TOKEN: {
     statusHttp: statusHttp.UNAUTHORIZED,
     message: 'Expired or invalid token',
+  },
+  PROPERTY_INVALID: {
+    statusHttp: statusHttp.BAD_REQUEST,
+    message: 'Property is not equal status',
   },
 };
 

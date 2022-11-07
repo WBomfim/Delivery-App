@@ -10,7 +10,7 @@ const login = async (email, password) => {
   if (!userExist) throw new Error(errorsTypes.USER_NOT_FOUND);
   const { password: userPassword } = userExist;
   if (md5(password) !== userPassword) throw new Error(errorsTypes.INVALID_PASSWORD);
-  const token = generateToken(user);
+  const token = generateToken(userExist);
   return {
     name: userExist.name,
     email: userExist.email,
@@ -39,7 +39,16 @@ const addUser = async (name, email, password) => {
   };
 };
 
+const getSellers = async () => {
+  const sellers = await user.findAll({
+    where: { role: 'seller' },
+    attributes: { exclude: ['password', 'email', 'role'] },
+  });
+  return sellers;
+};
+
 module.exports = {
   login,
   addUser,
+  getSellers,
 };

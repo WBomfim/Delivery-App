@@ -26,16 +26,16 @@ export default function SaleCard({ sale }) {
       <div>
         <div>
           <div>
-            <p data-testid={ `seller_orders__element-delivery-status-${id}` }>
+            <h2 data-testid={ `seller_orders__element-delivery-status-${id}` }>
               { status }
-            </p>
+            </h2>
           </div>
           <div>
             <p data-testid={ `seller_orders__element-order-date-${id}` }>
               { saleDate }
             </p>
             <p data-testid={ `seller_orders__element-card-price-${id}` }>
-              { `R$ ${totalPrice}` }
+              { `R$ ${totalPrice.toString().replace('.', ',')}` }
             </p>
           </div>
         </div>

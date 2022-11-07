@@ -28,7 +28,7 @@ export default function Redister() {
     setFailedTryRegister(false);
     try {
       const response = await requestRegister('/users', { name, email, password });
-      localStorage.setItem('userTrybeer', JSON.stringify(response));
+      localStorage.setItem('user', JSON.stringify(response));
       return navigate('/customer/products');
     } catch (error) {
       setFailedTryRegister(true);

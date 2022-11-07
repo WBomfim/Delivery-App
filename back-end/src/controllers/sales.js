@@ -8,11 +8,27 @@ const findAll = async (_req, res) => {
 
 const findById = async (req, res) => {
   const { id } = req.params;
-  const saleById = await salesService.findById(id);
+  const saleById = await salesService.findById(Number(id));
   res.status(statusHttp.OK).json(saleById);
+};
+
+const addSale = async (req, res) => {
+  const { id: userId } = req.user;
+  const { body } = req;
+  const newSale = await salesService.addSale(userId, body);
+  res.status(statusHttp.CREATED).json(newSale);
+};
+
+const updateSaleStatus = async (req, res) => {
+  const { id } = req.params;
+  const { body } = req;
+  const updatedSale = await salesService.updateSaleStatus(Number(id), body);
+  res.status(statusHttp.OK).json(updatedSale);
 };
 
 module.exports = {
   findAll,
   findById,
+  addSale,
+  updateSaleStatus,
 };

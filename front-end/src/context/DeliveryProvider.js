@@ -15,7 +15,7 @@ function DeliveryProvider({ children }) {
   }, [productsCarShop]);
 
   const removeProductFromCart = (id) => {
-    setProductsCarShop(productsCarShop.filter((ev) => ev.idProduct !== id));
+    setProductsCarShop(productsCarShop.filter((ev) => ev.productId !== id));
   };
 
   const contextValue = useMemo(() => ({

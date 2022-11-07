@@ -8,6 +8,15 @@ export default function Login() {
   const [disableButton, setDisableButton] = useState(true);
   const [failedTryLogin, setFailedTryLogin] = useState(false);
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) return;
+    if (user.role === 'customer') return navigate('/customer/products');
+    if (user.role === 'seller') return navigate('/seller/orders');
+  }, [navigate]);
+
   useEffect(() => {
     const lengthVerification = 6;
     const errors = [
@@ -17,8 +26,6 @@ export default function Login() {
     const hasErrors = errors.some((error) => error);
     setDisableButton(hasErrors);
   }, [email, password]);
-
-  const navigate = useNavigate();
 
   const login = async (event) => {
     event.preventDefault();

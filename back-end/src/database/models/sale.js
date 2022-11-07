@@ -36,9 +36,9 @@ const sale = (sequelize, DataTypes) => {
       as: 'seller',
     });
 
-    sale.hasMany(models.saleProduct, {
+    sale.hasMany(models.salesProduct, {
       foreignKey: 'saleId',
-      as: 'saleProducts',
+      as: 'salesProducts',
     });
   };
 

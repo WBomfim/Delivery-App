@@ -3,61 +3,43 @@ import PropTypes from 'prop-types';
 import DeliveryContext from '../context/DeliveryContext';
 
 function UserCheckoutItem({
-  index, idProduct, nameProduct, unitPrice, quanty, totalPrice }) {
+  index, productId, nameProduct, unitPrice, quantity, totalPrice,
+}) {
   const { removeProductFromCart } = useContext(DeliveryContext);
   return (
-
     <tr>
-      <td
-        data-testid={ `customer_checkout__element-order-table-item-number-${index}` }
-      >
+      <td data-testid={ `customer_checkout__element-order-table-item-number-${index}` }>
         { index + 1 }
-
       </td>
-      <td
-        data-testid={ `customer_checkout__element-order-table-name-${index}` }
-      >
+      <td data-testid={ `customer_checkout__element-order-table-name-${index}` }>
         { nameProduct }
-
       </td>
-      <td
-        data-testid={ `customer_checkout__element-order-table-quantity-${index}` }
-      >
-        { quanty }
-
+      <td data-testid={ `customer_checkout__element-order-table-quantity-${index}` }>
+        { quantity }
       </td>
-      <td
-        data-testid={ `customer_checkout__element-order-table-unit-price-${index}` }
-      >
+      <td data-testid={ `customer_checkout__element-order-table-unit-price-${index}` }>
         { unitPrice }
-
       </td>
-      <td
-        data-testid={ `customer_checkout__element-order-table-sub-total-${index}` }
-      >
+      <td data-testid={ `customer_checkout__element-order-table-sub-total-${index}` }>
         { totalPrice }
-
       </td>
       <td>
         <button
           data-testid={ `customer_checkout__element-order-table-remove-${index}` }
           type="button"
-          onClick={ () => removeProductFromCart(idProduct) }
+          onClick={ () => removeProductFromCart(productId) }
         >
           Remover
-
         </button>
-
       </td>
     </tr>
-
   );
 }
 
 UserCheckoutItem.propTypes = {
-  idProduct: PropTypes.number,
+  productId: PropTypes.number,
   nameProduct: PropTypes.string,
-  quanty: PropTypes.string,
+  quantity: PropTypes.string,
   unitPrice: PropTypes.number,
   totalPrice: PropTypes.number,
 }.isRequired;
