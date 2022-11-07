@@ -54,8 +54,9 @@ export default function OrderDetails() {
               { saleDate }
             </p>
             <p
-              // eslint-disable-next-line max-len
-              data-testid="seller_order_details__element-order-details-label-delivery-status"
+              data-testid={
+                `seller_order_details__element-order-details-label-delivery-status-${id}`
+              }
             >
               { status }
             </p>
