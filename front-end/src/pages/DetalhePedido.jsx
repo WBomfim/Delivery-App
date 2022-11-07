@@ -57,7 +57,7 @@ export default function DetalhePedido() {
           </p>
           <p
             data-testid={
-              `customer_order_details__element-order-details-label-delivery-status${id}`
+              `customer_order_details__element-order-details-label-delivery-status-${id}`
             }
           >
             { status }
