@@ -5,14 +5,12 @@ const formatSalesData = (sale) => {
       { ...restValues, quantity: productQuantity.quantity }
     ));
     
-    const newSaleDate = new Date(saleDate).toLocaleDateString('pt-BR');
-
     return {
       ...rest,
-      saleDate: newSaleDate,
+      saleDate: new Date(saleDate).toLocaleDateString('pt-BR'),
       status,
-      user,
-      seller,
+      userName: user.name,
+      sellerName: seller.name,
       products: newProducts,
     };
 };
