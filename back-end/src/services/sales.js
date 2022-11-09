@@ -18,13 +18,13 @@ const ASSOCIATIONS = [
 ];
 
 const findAllByUser = async (id) => {
-  const allSales = await sale.findAll({ where: { userId: id } }, { include: ASSOCIATIONS });
+  const allSales = await sale.findAll({ where: { userId: id }, include: ASSOCIATIONS });
   if (!allSales) throw new Error(errorsTypes.SALES_NOT_FOUND);
   return allSales.map((currSale) => formatSalesData(currSale));
 };
 
 const findAllBySeller = async (id) => {
-  const allSales = await sale.findAll({ where: { sellerId: id } }, { include: ASSOCIATIONS });
+  const allSales = await sale.findAll({ where: { sellerId: id }, include: ASSOCIATIONS });
   if (!allSales) throw new Error(errorsTypes.SALES_NOT_FOUND);
   return allSales.map((currSale) => formatSalesData(currSale));
 };
@@ -63,7 +63,7 @@ const updateStatus = async (id, saleStatus) => {
   const STATUS_TYPE = ['Pendente', 'Preparando', 'Em Trânsito', 'Entregue'];
   if (!saleStatus) throw new Error(errorsTypes.PROPERTY_STATUS_INVALID);
   if (!STATUS_TYPE.includes(saleStatus)) throw new Error(errorsTypes.INVALID_STATUS);
-  await sale.update(saleStatus, { where: { id } });
+  await sale.update({ status: saleStatus }, { where: { id } });
   return findById(id);
 };
 

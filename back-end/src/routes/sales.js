@@ -2,12 +2,14 @@ const router = require('express').Router();
 const salesController = require('../controllers/sales');
 const auth = require('../middlewares/auth');
 
-router.get('/', salesController.findAll);
+router.get('/user', auth, salesController.findAllByUser);
 
-router.get('/:id', salesController.findById);
+router.get('/seller', auth, salesController.findAllBySeller);
+
+router.get('/:id', auth, salesController.findById);
 
 router.post('/', auth, salesController.addSale);
 
-router.patch('/:id', auth, salesController.updateSaleStatus);
+router.patch('/:id', auth, salesController.updateStatus);
 
 module.exports = router;

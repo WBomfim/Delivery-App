@@ -1,34 +1,42 @@
 const salesService = require('../services/sales');
 const statusHttp = require('../utils/statusHttp');
 
-const findAll = async (_req, res) => {
-  const allSales = await salesService.findAll();
-  res.status(statusHttp.OK).json(allSales);
+const findAllByUser = async (req, res) => {
+  const { id } = req.user;
+  const allSales = await salesService.findAllByUser(id);
+  return res.status(statusHttp.OK).json(allSales);
+};
+
+const findAllBySeller = async (req, res) => {
+  const { id } = req.user;
+  const allSales = await salesService.findAllBySeller(id);
+  return res.status(statusHttp.OK).json(allSales);
 };
 
 const findById = async (req, res) => {
   const { id } = req.params;
-  const saleById = await salesService.findById(Number(id));
-  res.status(statusHttp.OK).json(saleById);
+  const saleById = await salesService.findById(id);
+  return res.status(statusHttp.OK).json(saleById);
 };
 
 const addSale = async (req, res) => {
-  const { id: userId } = req.user;
+  const { id } = req.user;
   const { body } = req;
-  const newSale = await salesService.addSale(userId, body);
-  res.status(statusHttp.CREATED).json(newSale);
+  const newSale = await salesService.addSale(id, body);
+  return res.status(statusHttp.CREATED).json(newSale);
 };
 
-const updateSaleStatus = async (req, res) => {
+const updateStatus = async (req, res) => {
   const { id } = req.params;
-  const { body } = req;
-  const updatedSale = await salesService.updateSaleStatus(Number(id), body);
-  res.status(statusHttp.OK).json(updatedSale);
+  const { status } = req.body;
+  const updatedSale = await salesService.updateStatus(id, status);
+  return res.status(statusHttp.OK).json(updatedSale);
 };
 
 module.exports = {
-  findAll,
+  findAllByUser,
+  findAllBySeller,
   findById,
   addSale,
-  updateSaleStatus,
+  updateStatus,
 };
