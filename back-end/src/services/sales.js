@@ -1,7 +1,7 @@
 const Sequilize = require('sequelize');
+const { development, test, production } = require('../database/config/config');
 const { user, sale, product, salesProduct } = require('../database/models');
 const formatSalesData = require('../helpers/formatSaleData');
-const { development, test, production } = require('../database/config/config');
 const { errorsTypes } = require('../utils/errorsCatalog');
 
 const sequelize = new Sequilize(development || test || production);
@@ -17,8 +17,14 @@ const ASSOCIATIONS = [
   },
 ];
 
-const findAll = async () => {
-  const allSales = await sale.findAll({ include: ASSOCIATIONS });
+const findAllByUser = async (id) => {
+  const allSales = await sale.findAll({ where: { userId: id } }, { include: ASSOCIATIONS });
+  if (!allSales) throw new Error(errorsTypes.SALES_NOT_FOUND);
+  return allSales.map((currSale) => formatSalesData(currSale));
+};
+
+const findAllBySeller = async (id) => {
+  const allSales = await sale.findAll({ where: { sellerId: id } }, { include: ASSOCIATIONS });
   if (!allSales) throw new Error(errorsTypes.SALES_NOT_FOUND);
   return allSales.map((currSale) => formatSalesData(currSale));
 };
@@ -53,17 +59,18 @@ const addSale = async (userId, saleData) => {
   return findById(newSaleId);
 };
 
-const updateSaleStatus = async (id, saleStatus) => {
-  const statusTypes = ['Pendente', 'Preparando', 'Em Trânsito', 'Entregue'];
+const updateStatus = async (id, saleStatus) => {
+  const STATUS_TYPE = ['Pendente', 'Preparando', 'Em Trânsito', 'Entregue'];
   if (!saleStatus) throw new Error(errorsTypes.PROPERTY_STATUS_INVALID);
-  if (!statusTypes.includes(saleStatus)) throw new Error(errorsTypes.INVALID_STATUS);
+  if (!STATUS_TYPE.includes(saleStatus)) throw new Error(errorsTypes.INVALID_STATUS);
   await sale.update(saleStatus, { where: { id } });
   return findById(id);
 };
 
 module.exports = {
-  findAll,
+  findAllByUser,
+  findAllBySeller,
   findById,
   addSale,
-  updateSaleStatus,
+  updateStatus,
 };
