@@ -5,6 +5,7 @@ const jwtKey = fs.readFileSync('./jwt.evaluation.key', { encoding: 'utf-8' });
 
 const generateToken = (user) => {
   const { id, email, role } = user;
+
   const payload = {
     id,
     email,
