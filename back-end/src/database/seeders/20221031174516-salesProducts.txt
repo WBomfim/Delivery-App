@@ -1,3 +1,5 @@
+// Seeder utilizado no desenvolvimento da aplicação. Arquivo desativado para não gerar conflito nos testes.
+
 module.exports = {
   up: async (queryInterface) => {
     await queryInterface.bulkInsert('sales_products',
