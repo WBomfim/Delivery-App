@@ -6,7 +6,10 @@ const errorsTypes = {
   INVALID_PASSWORD: 'INVALID_PASSWORD',
   TOKEN_NOT_FOUND: 'TOKEN_NOT_FOUND',
   INVALID_TOKEN: 'INVALID_TOKEN',
-  PROPERTY_INVALID: 'PROPERTY_INVALID',
+  PROPERTY_STATUS_INVALID: 'PROPERTY_STATUS_INVALID',
+  INVALID_STATUS: 'INVALID_STATUS',
+  SALE_NOT_FOUND: 'SALE_NOT_FOUND',
+  SALES_NOT_FOUND: 'SALES_NOT_FOUND',
 };
 
 const errorsCatalog = {
@@ -30,9 +33,21 @@ const errorsCatalog = {
     statusHttp: statusHttp.UNAUTHORIZED,
     message: 'Expired or invalid token',
   },
-  PROPERTY_INVALID: {
+  PROPERTY_STATUS_INVALID: {
     statusHttp: statusHttp.BAD_REQUEST,
     message: 'Property is not equal status',
+  },
+  INVALID_STATUS: {
+    statusHttp: statusHttp.BAD_REQUEST,
+    message: 'Invalid status, must be "Pendente", "Preparando", "Em Trânsito" or "Entregue"',
+  },
+  SALE_NOT_FOUND: {
+    statusHttp: statusHttp.NOT_FOUND,
+    message: 'Sale not found',
+  },
+  SALES_NOT_FOUND: {
+    statusHttp: statusHttp.NOT_FOUND,
+    message: 'Sales not found',
   },
 };
 
