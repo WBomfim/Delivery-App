@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { logout } from '../services/handleStorage';
 import DeliveryContext from '../context/DeliveryContext';
-import { getData, setToken, requestRegister } from '../services/requests';
+import { requestData, setToken, requestRegister } from '../services/requests';
 
 export default function CheckoutFinish() {
   const [seller, setSeller] = useState();
@@ -14,11 +15,17 @@ export default function CheckoutFinish() {
 
   useEffect(() => {
     const getSallers = async () => {
-      const response = await getData('/users/sellers');
-      setSellers(response);
+      try {
+        setToken();
+        const response = await requestData('/users/sellers');
+        setSellers(response);
+      } catch (error) {
+        logout();
+        navigate('/');
+      }
     };
     getSallers();
-  }, []);
+  }, [navigate]);
 
   const finishSale = async () => {
     const saleData = {
@@ -29,11 +36,14 @@ export default function CheckoutFinish() {
       products: productsCarShop,
     };
 
-    const { token } = JSON.parse(localStorage.getItem('user'));
-    setToken(token);
-
-    const { id } = await requestRegister('/sales', saleData);
-    navigate(`/customer/orders/${id}`);
+    try {
+      setToken();
+      const { id } = await requestRegister('/sales', saleData);
+      navigate(`/customer/orders/${id}`);
+    } catch (error) {
+      logout();
+      navigate('/');
+    }
   };
 
   return (
@@ -49,11 +59,13 @@ export default function CheckoutFinish() {
             data-testid="customer_checkout__select-seller"
           >
             <option value="">Selecione um Vendedor</option>
-            {sellers.map((currSaller) => (
-              <option key={ currSaller.id } value={ currSaller.id }>
-                {currSaller.name}
-              </option>
-            ))}
+            {
+              sellers.map((currSaller) => (
+                <option key={ currSaller.id } value={ currSaller.id }>
+                  {currSaller.name}
+                </option>
+              ))
+            }
           </select>
         </label>
         <label htmlFor="address">
