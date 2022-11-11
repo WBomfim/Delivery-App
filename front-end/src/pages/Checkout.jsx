@@ -12,7 +12,7 @@ export default function Checkout() {
       <main>
         <TableProductsCheckout />
         <p data-testid="customer_checkout__element-order-total-price">
-          {`Total: ${(totalValue.toFixed(2).toString().replace('.', ','))}`}
+          {`Total: R$ ${(totalValue.toFixed(2).toString().replace('.', ','))}`}
         </p>
         <CheckoutFinish />
       </main>

@@ -45,14 +45,14 @@ export default function TableProductsCheckout() {
                   `customer_checkout__element-order-table-unit-price-${index}`
                 }
               >
-                { unitPrice.toFixed(2).replace('.', ',') }
+                { `R$ ${unitPrice.toFixed(2).replace('.', ',')}` }
               </td>
               <td
                 data-testid={
                   `customer_checkout__element-order-table-sub-total-${index}`
                 }
               >
-                { totalPrice.toFixed(2).replace('.', ',') }
+                { `R$ ${totalPrice.toFixed(2).replace('.', ',')}` }
               </td>
               <td>
                 <button
