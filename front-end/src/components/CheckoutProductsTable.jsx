@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import DeliveryContext from '../context/DeliveryContext';
 
-export default function TableProductsCheckout() {
+export default function CheckoutProductsTable() {
   const { productsCarShop, removeProductFromCart } = useContext(DeliveryContext);
 
   return (
