@@ -9,7 +9,7 @@ export default function CardCustomerOrder({ id, status, data, price }) {
     <div onClick={ () => navigate(`/customer/orders/${id}`) } aria-hidden>
       <div data-testid={ `customer_orders__element-order-id-${id}` }>
         <p>Pedido</p>
-        { id }
+        { id.toLocaleString('en-US', { minimumIntegerDigits: 4, useGrouping: false }) }
       </div>
       <h2 data-testid={ `customer_orders__element-delivery-status-${id}` }>
         { status }
@@ -18,7 +18,7 @@ export default function CardCustomerOrder({ id, status, data, price }) {
         { data }
       </p>
       <p data-testid={ `customer_orders__element-card-price-${id}` }>
-        { price.toString().replace('.', ',') }
+        { `R$ ${price.toString().replace('.', ',')}` }
       </p>
     </div>
   );

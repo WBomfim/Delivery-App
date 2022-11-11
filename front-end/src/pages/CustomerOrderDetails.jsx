@@ -56,7 +56,12 @@ export default function CustomerOrderDetails() {
             <p
               data-testid="customer_order_details__element-order-details-label-order-id"
             >
-              { `PEDIDO ${id}` }
+              {
+                `PEDIDO ${id.toLocaleString('en-US', {
+                  minimumIntegerDigits: 4,
+                  useGrouping: false,
+                })}`
+              }
             </p>
             <p
               data-testid="customer_order_details__element-order-details-label-seller-name"
