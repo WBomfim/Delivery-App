@@ -64,6 +64,6 @@ OrderDatailTable.propTypes = {
     id: PropTypes.number,
     name: PropTypes.string,
     quantity: PropTypes.number,
-    price: PropTypes.number,
+    price: PropTypes.string,
   })).isRequired,
 };
