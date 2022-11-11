@@ -13,64 +13,64 @@ export default {
   12: 'customer_products__element-navbar-link-orders',
   13: 'customer_products__element-navbar-user-full-name',
   14: 'customer_products__element-navbar-link-logout',
-  15: 'customer_products__element-card-title-', // <id>
-  16: 'customer_products__element-card-price-', // <id>
-  17: 'customer_products__img-card-bg-image-', // <id>
-  18: 'customer_products__button-card-add-item-', // <id>
-  19: 'customer_products__button-card-rm-item-', // <id>
-  20: 'customer_products__input-card-quantity-', // <id>
+  15: (id) => `customer_products__element-card-title-${id}`,
+  16: (id) => `customer_products__element-card-price-${id}`,
+  17: (id) => `customer_products__img-card-bg-image-${id}`,
+  18: (id) => `customer_products__button-card-add-item-${id}`,
+  19: (id) => `customer_products__button-card-rm-item-${id}`,
+  20: (id) => `customer_products__input-card-quantity-${id}`,
   21: 'customer_products__checkout-bottom-value',
-  22: 'customer_checkout__element-order-table-item-number-', // <index>
-  23: 'customer_checkout__element-order-table-name-', // <index>
-  24: 'customer_checkout__element-order-table-quantity-', // <index>
-  25: 'customer_checkout__element-order-table-unit-price-', // <index>
-  26: 'customer_checkout__element-order-table-sub-total-', // <index>
-  27: 'customer_checkout__element-order-table-remove-', // <index>
+  22: (i) => `customer_checkout__element-order-table-item-number-${i}`,
+  23: (i) => `customer_checkout__element-order-table-name-${i}`,
+  24: (i) => `customer_checkout__element-order-table-quantity-${i}`,
+  25: (i) => `customer_checkout__element-order-table-unit-price-${i}`,
+  26: (i) => `customer_checkout__element-order-table-sub-total-${i}`,
+  27: (i) => `customer_checkout__element-order-table-remove-${i}`,
   28: 'customer_checkout__element-order-total-price',
   29: 'customer_checkout__select-seller',
   30: 'customer_checkout__input-address',
   31: 'customer_checkout__input-address-number',
   32: 'customer_checkout__button-submit-order',
-  33: 'customer_orders__element-order-id-', // <id>
-  34: 'customer_orders__element-delivery-status-', // <id>
-  35: 'customer_orders__element-order-date-', // <id>
-  36: 'customer_orders__element-card-price-', // <id>
-  37: 'customer_order_details__element-order-details-label-order-', // id
+  33: (id) => `customer_orders__element-order-id-${id}`,
+  34: (id) => `customer_orders__element-delivery-status-${id}`,
+  35: (id) => `customer_orders__element-order-date-${id}`,
+  36: (id) => `customer_orders__element-card-price-${id}`,
+  37: (id) => `customer_order_details__element-order-details-label-order-${id}`,
   38: 'customer_order_details__element-order-details-label-seller-name',
   39: 'customer_order_details__element-order-details-label-order-date',
-  41: 'customer_order_details__element-order-table-item-number-', // <index>
-  40: 'customer_order_details__element-order-details-label-delivery-status-', // <index>
-  42: 'customer_order_details__element-order-table-name-', // <index>
-  43: 'customer_order_details__element-order-table-quantity-', // <index>
-  44: 'customer_order_details__element-order-table-unit-price-', // <index>
-  45: 'customer_order_details__element-order-table-sub-total-', // <index>
+  41: (i) => `customer_order_details__element-order-table-item-number-${i}`,
+  40: (i) => `customer_order_details__element-order-details-label-delivery-status-${i}`,
+  42: (i) => `customer_order_details__element-order-table-name-${i}`,
+  43: (i) => `customer_order_details__element-order-table-quantity-${i}`,
+  44: (i) => `customer_order_details__element-order-table-unit-price-${i}`,
+  45: (i) => `customer_order_details__element-order-table-sub-total-${i}`,
   46: 'customer_order_details__element-order-total-price',
   47: 'customer_order_details__button-delivery-check',
-  48: 'seller_orders__element-order-id-', // <id>
-  49: 'seller_orders__element-delivery-status-', // <id>
-  50: 'seller_orders__element-order-date-', // <id>
-  51: 'seller_orders__element-card-price-', // <id>
-  52: 'seller_orders__element-card-address-', // <id>
+  48: (id) => `seller_orders__element-order-id-${id}`,
+  49: (id) => `seller_orders__element-delivery-status-${id}`,
+  50: (id) => `seller_orders__element-order-date-${id}`,
+  51: (id) => `seller_orders__element-card-price-${id}`,
+  52: (id) => `seller_orders__element-card-address-${id}`,
   53: 'seller_order_details__element-order-details-label-order-id',
   54: 'seller_order_details__element-order-details-label-delivery-status',
   55: 'seller_order_details__element-order-details-label-order-date',
   56: 'seller_order_details__button-preparing-check',
   57: 'seller_order_details__button-dispatch-check',
-  58: 'seller_order_details__element-order-table-item-number-', // <index>
-  59: 'seller_order_details__element-order-table-name-', // <index>
-  60: 'seller_order_details__element-order-table-quantity-', // <index>
-  61: 'seller_order_details__element-order-table-unit-price-', // <index>
-  62: 'seller_order_details__element-order-table-sub-total-', // <index>
+  58: (i) => `seller_order_details__element-order-table-item-number-${i}`,
+  59: (i) => `seller_order_details__element-order-table-name-${i}`,
+  60: (i) => `seller_order_details__element-order-table-quantity-${i}`,
+  61: (i) => `seller_order_details__element-order-table-unit-price-${i}`,
+  62: (i) => `seller_order_details__element-order-table-sub-total-${i}`,
   63: 'seller_order_details__element-order-total-price',
   64: 'admin_manage__input-name',
   65: 'admin_manage__input-email',
   66: 'admin_manage__input-password',
   67: 'admin_manage__button-register',
   68: 'admin_manage__select-role',
-  69: 'admin_manage__element-user-table-item-number-', // <index>
-  70: 'admin_manage__element-user-table-name-', // <index>
-  71: 'admin_manage__element-user-table-email-', // <index>
-  72: 'admin_manage__element-user-table-role-', // <index>
-  73: 'admin_manage__element-user-table-remove-', // <index>
+  69: (i) => `admin_manage__element-user-table-item-number-${i}`,
+  70: (i) => `admin_manage__element-user-table-name-${i}`,
+  71: (i) => `admin_manage__element-user-table-email-${i}`,
+  72: (i) => `admin_manage__element-user-table-role-${i}`,
+  73: (i) => `admin_manage__element-user-table-remove-${i}`,
   74: 'admin_manage__element-invalid-register',
 };
