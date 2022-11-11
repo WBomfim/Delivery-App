@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Header from '../components/Header';
 import DeliveryContext from '../context/DeliveryContext';
 import CheckoutFinish from '../components/CheckoutFinish';
-import TableProductsCheckout from '../components/TableProductsCheckout';
+import CheckoutProductsTable from '../components/CheckoutProductsTable';
 
 export default function Checkout() {
   const { totalValue } = useContext(DeliveryContext);
@@ -10,7 +10,7 @@ export default function Checkout() {
     <>
       <Header />
       <main>
-        <TableProductsCheckout />
+        <CheckoutProductsTable />
         <p data-testid="customer_checkout__element-order-total-price">
           {`Total: R$ ${(totalValue.toFixed(2).toString().replace('.', ','))}`}
         </p>
