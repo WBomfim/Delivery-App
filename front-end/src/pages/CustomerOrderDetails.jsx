@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
-import OrderDatailTable from '../components/OrderDatailTable';
+import CustomerOrderDatailTable from '../components/CustomerOrderDatailTable';
 import { logout } from '../services/handleStorage';
 import { requestDetails, requestUpdate, setToken } from '../services/requests';
 
@@ -84,7 +84,7 @@ export default function CustomerOrderDetails() {
               MARCAR COMO ENTREGUE
             </button>
           </div>
-          <OrderDatailTable products={ products } />
+          <CustomerOrderDatailTable products={ products } />
           <div>
             <span>TOTAL: R$ </span>
             <span
