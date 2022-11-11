@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import DeliveryContext from '../context/DeliveryContext';
+import dataTestId from '../utils/dataTestIds';
 
 export default function CustomerProductCard({ id, name, price, urlImage }) {
   const [quantyProduct, setquantyProduct] = useState(0);
@@ -55,37 +56,37 @@ export default function CustomerProductCard({ id, name, price, urlImage }) {
   return (
     <div>
       <div>
-        <p data-testid={ `customer_products__element-card-price-${id}` }>
+        <p data-testid={ dataTestId[16](id) }>
           { `R$ ${price.toFixed(2).replace('.', ',')}` }
         </p>
         <img
           width="120px"
           src={ urlImage }
           alt={ name }
-          data-testid={ `customer_products__img-card-bg-image-${id}` }
+          data-testid={ dataTestId[17](id) }
         />
       </div>
       <div>
-        <p data-testid={ `customer_products__element-card-title-${id}` }>
+        <p data-testid={ dataTestId[15](id) }>
           { name }
         </p>
         <div>
           <button
             type="button"
             onClick={ removeItem }
-            data-testid={ `customer_products__button-card-rm-item-${id}` }
+            data-testid={ dataTestId[19](id) }
           >
             -
           </button>
           <input
             value={ quantyProduct }
             onChange={ setQuantity }
-            data-testid={ `customer_products__input-card-quantity-${id}` }
+            data-testid={ dataTestId[20](id) }
           />
           <button
             type="button"
             onClick={ addItem }
-            data-testid={ `customer_products__button-card-add-item-${id}` }
+            data-testid={ dataTestId[18](id) }
           >
             +
           </button>

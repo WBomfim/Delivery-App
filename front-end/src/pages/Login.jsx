@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { requestLogin } from '../services/requests';
 import { saveLogin, getLogin } from '../services/handleStorage';
+import dataTestId from '../utils/dataTestIds';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -61,8 +62,8 @@ export default function Login() {
             type="text"
             value={ email }
             onChange={ ({ target: { value } }) => setEmail(value) }
-            data-testid="common_login__input-email"
             placeholder="email@trybeer.com.br"
+            data-testid={ dataTestId[1] }
           />
         </label>
         <label htmlFor="password-input">
@@ -71,22 +72,22 @@ export default function Login() {
             type="password"
             value={ password }
             onChange={ ({ target: { value } }) => setPassword(value) }
-            data-testid="common_login__input-password"
             placeholder="*************"
+            data-testid={ dataTestId[2] }
           />
         </label>
         <button
-          data-testid="common_login__button-login"
           type="submit"
           disabled={ disableButton }
           onClick={ (event) => login(event) }
+          data-testid={ dataTestId[3] }
         >
           LOGIN
         </button>
         <button
-          data-testid="common_login__button-register"
           type="button"
           onClick={ () => navigate('/register') }
+          data-testid={ dataTestId[4] }
         >
           Ainda não tenho conta
         </button>
@@ -95,7 +96,7 @@ export default function Login() {
         {
           failedTryLogin
             ? (
-              <p data-testid="common_login__element-invalid-email">
+              <p data-testid={ dataTestId[5] }>
                 {
                   `O endereço de e-mail ou a senha não estão corretos.
                 Por favor, tente novamente.`

@@ -5,6 +5,7 @@ import { logout } from '../services/handleStorage';
 import DeliveryContext from '../context/DeliveryContext';
 import Header from '../components/Header';
 import CustomerProductCard from '../components/CustomerProductCard';
+import dataTestId from '../utils/dataTestIds';
 
 export default function CustomerProducts() {
   const [products, setProducts] = useState([]);
@@ -50,9 +51,9 @@ export default function CustomerProducts() {
           type="button"
           disabled={ totalValue === 0 }
           onClick={ () => navigate('/customer/checkout') }
-          data-testid="customer_products__button-cart"
+          data-testid={ dataTestId[75] }
         >
-          <div data-testid="customer_products__checkout-bottom-value">
+          <div data-testid={ dataTestId[21] }>
             { `Ver Carrinho: R$ ${totalValue.toFixed(2).toString().replace('.', ',')}` }
           </div>
         </button>

@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import DeliveryContext from '../context/DeliveryContext';
+import dataTestId from '../utils/dataTestIds';
 
 export default function CheckoutProductsTable() {
   const { productsCarShop, removeProductFromCart } = useContext(DeliveryContext);
@@ -23,42 +24,26 @@ export default function CheckoutProductsTable() {
             index,
           ) => (
             <tr key={ index }>
-              <td
-                data-testid={
-                  `customer_checkout__element-order-table-item-number-${index}`
-                }
-              >
+              <td data-testid={ dataTestId[22](index) }>
                 { index + 1 }
               </td>
-              <td data-testid={ `customer_checkout__element-order-table-name-${index}` }>
+              <td data-testid={ dataTestId[23](index) }>
                 { nameProduct }
               </td>
-              <td
-                data-testid={
-                  `customer_checkout__element-order-table-quantity-${index}`
-                }
-              >
+              <td data-testid={ dataTestId[24](index) }>
                 { quantity }
               </td>
-              <td
-                data-testid={
-                  `customer_checkout__element-order-table-unit-price-${index}`
-                }
-              >
+              <td data-testid={ dataTestId[25](index) }>
                 { `R$ ${unitPrice.toFixed(2).replace('.', ',')}` }
               </td>
-              <td
-                data-testid={
-                  `customer_checkout__element-order-table-sub-total-${index}`
-                }
-              >
+              <td data-testid={ dataTestId[26](index) }>
                 { `R$ ${totalPrice.toFixed(2).replace('.', ',')}` }
               </td>
               <td>
                 <button
                   type="button"
                   onClick={ () => removeProductFromCart(productId) }
-                  data-testid={ `customer_checkout__element-order-table-remove-${index}` }
+                  data-testid={ dataTestId[27](index) }
                 >
                   Remover
                 </button>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { getLogin, logout } from '../services/handleStorage';
+import dataTestId from '../utils/dataTestIds';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ export default function Header() {
           <button
             type="button"
             onClick={ redirectProdutos }
-            data-testid="customer_products__element-navbar-link-products"
+            data-testid={ dataTestId[11] }
           >
             PRODUTOS
           </button>
@@ -43,18 +44,18 @@ export default function Header() {
       <button
         type="button"
         onClick={ redirectMeusPedidos }
-        data-testid="customer_products__element-navbar-link-orders"
+        data-testid={ dataTestId[12] }
       >
         { userType === 'seller' ? 'PEDIDOS' : 'MEUS PEDIDOS' }
       </button>
       <div>
-        <p data-testid="customer_products__element-navbar-user-full-name">
+        <p data-testid={ dataTestId[13] }>
           { nameUser }
         </p>
         <button
           type="button"
           onClick={ logoutBtn }
-          data-testid="customer_products__element-navbar-link-logout"
+          data-testid={ dataTestId[14] }
         >
           Sair
         </button>

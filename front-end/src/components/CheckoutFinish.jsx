@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { logout } from '../services/handleStorage';
 import DeliveryContext from '../context/DeliveryContext';
 import { requestData, setToken, requestRegister } from '../services/requests';
+import dataTestId from '../utils/dataTestIds';
 
 export default function CheckoutFinish() {
   const [seller, setSeller] = useState();
@@ -56,7 +57,7 @@ export default function CheckoutFinish() {
             id="saller"
             value={ seller }
             onChange={ ({ target: { value } }) => setSeller(value) }
-            data-testid="customer_checkout__select-seller"
+            data-testid={ dataTestId[29] }
           >
             <option value="">Selecione um Vendedor</option>
             {
@@ -75,7 +76,7 @@ export default function CheckoutFinish() {
             id="address"
             value={ address }
             onChange={ ({ target: { value } }) => setAddress(value) }
-            data-testid="customer_checkout__input-address"
+            data-testid={ dataTestId[30] }
           />
         </label>
         <label htmlFor="number">
@@ -85,14 +86,14 @@ export default function CheckoutFinish() {
             id="number"
             value={ numberAddress }
             onChange={ ({ target: { value } }) => setNumberAddress(value) }
-            data-testid="customer_checkout__input-address-number"
+            data-testid={ dataTestId[31] }
           />
         </label>
       </form>
       <button
         type="button"
         onClick={ finishSale }
-        data-testid="customer_checkout__button-submit-order"
+        data-testid={ dataTestId[32] }
       >
         Finalizar Pedido
       </button>

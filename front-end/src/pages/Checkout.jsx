@@ -3,6 +3,7 @@ import DeliveryContext from '../context/DeliveryContext';
 import Header from '../components/Header';
 import CheckoutFinish from '../components/CheckoutFinish';
 import CheckoutProductsTable from '../components/CheckoutProductsTable';
+import dataTestId from '../utils/dataTestIds';
 
 export default function Checkout() {
   const { totalValue } = useContext(DeliveryContext);
@@ -11,7 +12,7 @@ export default function Checkout() {
       <Header />
       <main>
         <CheckoutProductsTable />
-        <p data-testid="customer_checkout__element-order-total-price">
+        <p data-testid={ dataTestId[28] }>
           {`Total: R$ ${(totalValue.toFixed(2).toString().replace('.', ','))}`}
         </p>
         <CheckoutFinish />

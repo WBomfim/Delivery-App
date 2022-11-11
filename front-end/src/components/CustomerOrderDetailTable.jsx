@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import dataTestId from '../utils/dataTestIds';
 
 export default function CustomerOrderDetailTable({ products }) {
   return (
@@ -17,39 +18,19 @@ export default function CustomerOrderDetailTable({ products }) {
       <tbody>
         { products.map(({ id, name, quantity, price }, index) => (
           <tr key={ name }>
-            <td
-              data-testid={
-                `customer_order_details__element-order-table-item-number-${index}`
-              }
-            >
+            <td data-testid={ dataTestId[41](index) }>
               { id }
             </td>
-            <td
-              data-testid={
-                `customer_order_details__element-order-table-item-number-${index}`
-              }
-            >
+            <td data-testid={ dataTestId[42](index) }>
               { name }
             </td>
-            <td
-              data-testid={
-                `customer_order_details__element-order-table-quantity-${index}`
-              }
-            >
+            <td data-testid={ dataTestId[43](index) }>
               { quantity }
             </td>
-            <td
-              data-testid={
-                `customer_order_details__element-order-table-unit-price-${index}`
-              }
-            >
+            <td data-testid={ dataTestId[44](index) }>
               { `R$ ${price.replace('.', ',')}` }
             </td>
-            <td
-              data-testid={
-                `customer_order_details__element-order-table-sub-total-${index}`
-              }
-            >
+            <td data-testid={ dataTestId[45](index) }>
               { `R$ ${(price * quantity).toFixed(2).replace('.', ',')}` }
             </td>
           </tr>

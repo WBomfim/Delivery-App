@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { requestRegister } from '../services/requests';
 import { saveLogin } from '../services/handleStorage';
+import dataTestId from '../utils/dataTestIds';
 
 export default function Redister() {
   const [name, setName] = useState('');
@@ -43,45 +44,48 @@ export default function Redister() {
     <main className="user-cadastro">
       <form>
         <label htmlFor="name-input">
+          Nome:
           <input
             className="register__input-name"
             type="text"
-            data-testid="common_register__input-name"
             onChange={ ({ target: { value } }) => { setName(value); } }
             placeholder="Seu nome"
+            data-testid={ dataTestId[6] }
           />
         </label>
         <label htmlFor="email-input">
+          Email:
           <input
             className="common_register__input-email"
             type="text"
-            data-testid="common_register__input-email"
             onChange={ ({ target: { value } }) => { setEmail(value); } }
             placeholder="seu-email@site.com.br"
+            data-testid={ dataTestId[7] }
           />
         </label>
         <label htmlFor="password-input">
+          Senha:
           <input
             className="common_register__input-password"
             type="text"
-            data-testid="common_register__input-password"
             onChange={ ({ target: { value } }) => { setPassword(value); } }
             placeholder="**********"
+            data-testid={ dataTestId[8] }
           />
         </label>
         <button
           type="submit"
-          data-testid="common_register__button-register"
           disabled={ disableButton }
           onClick={ (event) => register(event) }
+          data-testid={ dataTestId[9] }
         >
-          Cadastrar
+          CADASTRAR
         </button>
       </form>
       <div>
         { (failedTryRegister)
           ? (
-            <p data-testid="common_register__element-invalid_register">
+            <p data-testid={ dataTestId[10] }>
               O email já está cadastrado em nosso banco de dados.
             </p>
           ) : null}

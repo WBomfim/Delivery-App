@@ -4,6 +4,7 @@ import { requestDetails, requestUpdate, setToken } from '../services/requests';
 import { logout } from '../services/handleStorage';
 import Header from '../components/Header';
 import SellerOrderDetailTable from '../components/SellerOrderDetailTable';
+import dataTestId from '../utils/dataTestIds';
 
 export default function OrderDetails() {
   const [sale, setSale] = useState();
@@ -50,7 +51,7 @@ export default function OrderDetails() {
         <div>
           <div>
             <p
-              data-testid="seller_order_details__element-order-details-label-order-id"
+              data-testid={ dataTestId[53] }
             >
               {
                 `PEDIDO ${id.toLocaleString('en-US', {
@@ -60,14 +61,12 @@ export default function OrderDetails() {
               }
             </p>
             <p
-              data-testid="seller_order_details__element-order-details-label-order-date"
+              data-testid={ dataTestId[55] }
             >
               { saleDate }
             </p>
             <p
-              data-testid={
-                `seller_order_details__element-order-details-label-delivery-status-${id}`
-              }
+              data-testid={ dataTestId[54] }
             >
               { status }
             </p>
@@ -77,7 +76,7 @@ export default function OrderDetails() {
               type="button"
               disabled={ status !== 'Pendente' }
               onClick={ prepareSale }
-              data-testid="seller_order_details__button-preparing-check"
+              data-testid={ dataTestId[56] }
             >
               PREPARAR PEDIDO
             </button>
@@ -85,7 +84,7 @@ export default function OrderDetails() {
               type="button"
               disabled={ status !== 'Preparando' }
               onClick={ sendSale }
-              data-testid="seller_order_details__button-dispatch-check"
+              data-testid={ dataTestId[57] }
             >
               SAIU PARA ENTREGA
             </button>
@@ -94,7 +93,7 @@ export default function OrderDetails() {
         <SellerOrderDetailTable products={ products } />
         <div>
           <p
-            data-testid="seller_order_details__element-order-total-price"
+            data-testid={ dataTestId[63] }
           >
             { `Total: R$ ${totalPrice.toString().replace('.', ',')}` }
           </p>
