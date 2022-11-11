@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { requestRegister } from '../services/requests';
+import { saveLogin } from '../services/handleStorage';
 
 export default function Redister() {
   const [name, setName] = useState('');
@@ -9,26 +10,29 @@ export default function Redister() {
   const [disableButton, setDisableButton] = useState(true);
   const [failedTryRegister, setFailedTryRegister] = useState(false);
 
-  useEffect(() => {
-    const nameRule = 12;
-    const passwordRule = 6;
-    const errors = [
-      !name || name.length < nameRule,
-      !email || !email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/),
-      !password || password.length < passwordRule,
-    ];
-    const hasErrors = errors.some((error) => error);
-    setDisableButton(hasErrors);
-  }, [name, email, password]);
-
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const verifyRegisterData = () => {
+      const nameRule = 12;
+      const passwordRule = 6;
+      const errors = [
+        !name || name.length < nameRule,
+        !email || !email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/),
+        !password || password.length < passwordRule,
+      ];
+      const hasErrors = errors.some((error) => error);
+      setDisableButton(hasErrors);
+    };
+    verifyRegisterData();
+  }, [name, email, password]);
 
   const register = async (event) => {
     event.preventDefault();
     setFailedTryRegister(false);
     try {
       const response = await requestRegister('/users', { name, email, password });
-      localStorage.setItem('user', JSON.stringify(response));
+      saveLogin(response);
       return navigate('/customer/products');
     } catch (error) {
       setFailedTryRegister(true);
@@ -36,7 +40,7 @@ export default function Redister() {
   };
 
   return (
-    <section className="user-cadastro">
+    <main className="user-cadastro">
       <form>
         <label htmlFor="name-input">
           <input
@@ -82,6 +86,6 @@ export default function Redister() {
             </p>
           ) : null}
       </div>
-    </section>
+    </main>
   );
 }
