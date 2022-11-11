@@ -1,10 +1,10 @@
 export const saveLogin = (data) => {
-  localStorage.setItem('User_Trybeer', JSON.stringify(data));
+  localStorage.setItem('user', JSON.stringify(data));
 };
 
-export const getLogin = () => JSON.parse(localStorage.getItem('User_Trybeer'));
+export const getLogin = () => JSON.parse(localStorage.getItem('user'));
 
-export const logout = () => localStorage.removeItem('User_Trybeer');
+export const logout = () => localStorage.removeItem('user');
 
 export const getToken = () => {
   const { token } = getLogin();
