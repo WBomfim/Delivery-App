@@ -43,14 +43,14 @@ export default function OrderDatailTable({ products }) {
                 `customer_order_details__element-order-table-unit-price-${index}`
               }
             >
-              { price }
+              { `R$ ${price.replace('.', ',')}` }
             </td>
             <td
               data-testid={
                 `customer_order_details__element-order-table-sub-total-${index}`
               }
             >
-              { (price * quantity).toFixed(2) }
+              { `R$ ${(price * quantity).toFixed(2).replace('.', ',')}` }
             </td>
           </tr>
         ))}
