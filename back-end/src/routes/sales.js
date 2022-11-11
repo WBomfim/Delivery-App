@@ -2,7 +2,7 @@ const router = require('express').Router();
 const salesController = require('../controllers/sales');
 const auth = require('../middlewares/auth');
 
-router.get('/user', auth, salesController.findAllByUser);
+router.get('/customer', auth, salesController.findAllByUser);
 
 router.get('/seller', auth, salesController.findAllBySeller);
 
