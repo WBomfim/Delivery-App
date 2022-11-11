@@ -1,10 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
-export default function CardMeuPedidos({ id, status, data, price }) {
+export default function CardCustomerOrder({ id, status, data, price }) {
+  const navigate = useNavigate();
+
   return (
-    <Link to={ `/customer/orders/${id}` }>
+    <div onClick={ () => navigate(`/customer/orders/${id}`) } aria-hidden>
       <div data-testid={ `customer_orders__element-order-id-${id}` }>
         <p>Pedido</p>
         { id }
@@ -12,17 +14,17 @@ export default function CardMeuPedidos({ id, status, data, price }) {
       <h2 data-testid={ `customer_orders__element-delivery-status-${id}` }>
         { status }
       </h2>
-      <h4 data-testid={ `customer_orders__element-order-date-${id}` }>
+      <p data-testid={ `customer_orders__element-order-date-${id}` }>
         { data }
-      </h4>
-      <h4 data-testid={ `customer_orders__element-card-price-${id}` }>
+      </p>
+      <p data-testid={ `customer_orders__element-card-price-${id}` }>
         { price.toString().replace('.', ',') }
-      </h4>
-    </Link>
+      </p>
+    </div>
   );
 }
 
-CardMeuPedidos.propTypes = {
+CardCustomerOrder.propTypes = {
   id: PropTypes.number,
   status: PropTypes.string,
   data: PropTypes.string,
