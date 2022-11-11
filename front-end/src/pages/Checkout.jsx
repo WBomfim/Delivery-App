@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import Header from '../components/Header';
 import DeliveryContext from '../context/DeliveryContext';
+import Header from '../components/Header';
 import CheckoutFinish from '../components/CheckoutFinish';
 import CheckoutProductsTable from '../components/CheckoutProductsTable';
 

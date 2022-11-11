@@ -7,14 +7,17 @@ import CustomerOrderCard from '../components/CustomerOrderCard';
 
 export default function CustomerOrders() {
   const [sales, setSales] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const getSales = async () => {
       try {
+        setLoading(true);
         setToken();
         const data = await requestData('/sales/customer');
         setSales(data);
+        setLoading(false);
       } catch (error) {
         logout();
         navigate('/');
@@ -22,6 +25,8 @@ export default function CustomerOrders() {
     };
     getSales();
   }, [navigate]);
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <>

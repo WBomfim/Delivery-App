@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { requestDetails, requestUpdate, setToken } from '../services/requests';
+import { logout } from '../services/handleStorage';
 import Header from '../components/Header';
 import CustomerOrderDetailTable from '../components/CustomerOrderDetailTable';
-import { logout } from '../services/handleStorage';
-import { requestDetails, requestUpdate, setToken } from '../services/requests';
 
 export default function CustomerOrderDetails() {
   const [details, setDetails] = useState();

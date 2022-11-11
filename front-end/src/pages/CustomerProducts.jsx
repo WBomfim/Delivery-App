@@ -2,21 +2,24 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { setToken, requestData } from '../services/requests';
 import { logout } from '../services/handleStorage';
+import DeliveryContext from '../context/DeliveryContext';
 import Header from '../components/Header';
 import CustomerProductCard from '../components/CustomerProductCard';
-import DeliveryContext from '../context/DeliveryContext';
 
 export default function CustomerProducts() {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { totalValue } = useContext(DeliveryContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     const getProducts = async () => {
       try {
+        setLoading(true);
         setToken();
         const response = await requestData('/products');
         setProducts(response);
+        setLoading(false);
       } catch (error) {
         logout();
         navigate('/');
@@ -24,6 +27,8 @@ export default function CustomerProducts() {
     };
     getProducts();
   }, [navigate]);
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <>

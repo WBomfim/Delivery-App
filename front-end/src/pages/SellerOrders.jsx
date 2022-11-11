@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { requestData, setToken } from '../services/requests';
+import { logout } from '../services/handleStorage';
 import Header from '../components/Header';
 import SellerOrderCard from '../components/SellerOrderCard';
-import { logout } from '../services/handleStorage';
-import { requestData, setToken } from '../services/requests';
 
 export default function SellerOrders() {
   const [sales, setSales] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const getSales = async () => {
       try {
+        setLoading(true);
         setToken();
         const data = await requestData('/sales/seller');
         setSales(data);
+        setLoading(false);
       } catch (error) {
         logout();
         navigate('/');
@@ -22,6 +25,8 @@ export default function SellerOrders() {
     };
     getSales();
   }, [navigate]);
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <>
