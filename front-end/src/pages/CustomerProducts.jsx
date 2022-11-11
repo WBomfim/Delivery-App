@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { setToken, requestData } from '../services/requests';
 import { logout } from '../services/handleStorage';
 import Header from '../components/Header';
-import CardCustomerProduct from '../components/CardCustomerProduct';
+import CustomerProductCard from '../components/CustomerProductCard';
 import DeliveryContext from '../context/DeliveryContext';
 
 export default function CustomerProducts() {
@@ -31,7 +31,7 @@ export default function CustomerProducts() {
       <main>
         {
           products.map((ev, i) => (
-            <CardCustomerProduct
+            <CustomerProductCard
               key={ i }
               id={ ev.id }
               name={ ev.name }

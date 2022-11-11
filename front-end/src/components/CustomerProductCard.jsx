@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import DeliveryContext from '../context/DeliveryContext';
 
-export default function CardCustomerProduct({ id, name, price, urlImage }) {
+export default function CustomerProductCard({ id, name, price, urlImage }) {
   const [quantyProduct, setquantyProduct] = useState(0);
   const { productsCarShop, setProductsCarShop } = useContext(DeliveryContext);
 
@@ -95,7 +95,7 @@ export default function CardCustomerProduct({ id, name, price, urlImage }) {
   );
 }
 
-CardCustomerProduct.propTypes = {
+CustomerProductCard.propTypes = {
   id: PropTypes.number,
   name: PropTypes.string,
   price: PropTypes.number,

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { requestData, setToken } from '../services/requests';
 import { logout } from '../services/handleStorage';
 import Header from '../components/Header';
-import CardCustomerOrder from '../components/CardCustomerOrder';
+import CustomerOrderCard from '../components/CustomerOrderCard';
 
 export default function CustomerOrders() {
   const [sales, setSales] = useState([]);
@@ -29,7 +29,7 @@ export default function CustomerOrders() {
       <main>
         {
           sales.map(({ id, status, saleDate, totalPrice }) => (
-            <CardCustomerOrder
+            <CustomerOrderCard
               key={ id }
               id={ id }
               status={ status }

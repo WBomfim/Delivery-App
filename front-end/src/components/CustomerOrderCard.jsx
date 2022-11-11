@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-export default function CardCustomerOrder({ id, status, data, price }) {
+export default function CustomerOrderCard({ id, status, data, price }) {
   const navigate = useNavigate();
 
   return (
@@ -24,7 +24,7 @@ export default function CardCustomerOrder({ id, status, data, price }) {
   );
 }
 
-CardCustomerOrder.propTypes = {
+CustomerOrderCard.propTypes = {
   id: PropTypes.number,
   status: PropTypes.string,
   data: PropTypes.string,
