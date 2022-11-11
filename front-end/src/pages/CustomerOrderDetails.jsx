@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
-import CustomerOrderDatailTable from '../components/CustomerOrderDatailTable';
+import CustomerOrderDetailTable from '../components/CustomerOrderDetailTable';
 import { logout } from '../services/handleStorage';
 import { requestDetails, requestUpdate, setToken } from '../services/requests';
 
@@ -89,14 +89,11 @@ export default function CustomerOrderDetails() {
               MARCAR COMO ENTREGUE
             </button>
           </div>
-          <CustomerOrderDatailTable products={ products } />
+          <CustomerOrderDetailTable products={ products } />
           <div>
-            <span>TOTAL: R$ </span>
-            <span
-              data-testid="customer_order_details__element-order-total-price"
-            >
-              { totalPrice.toString().replace('.', ',') }
-            </span>
+            <p data-testid="customer_order_details__element-order-total-price">
+              { `TOTAL: R$ ${totalPrice.toString().replace('.', ',')}` }
+            </p>
           </div>
         </section>
       </main>
