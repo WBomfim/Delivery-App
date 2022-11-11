@@ -16,10 +16,10 @@ export default function SellerOrderDetailTable({ products }) {
       </thead>
 
       <tbody>
-        { products.map(({ id, name, quantity, price }, index) => (
+        { products.map(({ name, quantity, price }, index) => (
           <tr key={ name }>
             <td data-testid={ dataTestId[58](index) }>
-              { id }
+              { index + 1 }
             </td>
             <td data-testid={ dataTestId[59](index) }>
               { name }

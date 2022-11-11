@@ -6,9 +6,9 @@ import { requestData, setToken, requestRegister } from '../services/requests';
 import dataTestId from '../utils/dataTestIds';
 
 export default function CheckoutFinish() {
-  const [seller, setSeller] = useState();
-  const [address, setAddress] = useState();
-  const [numberAddress, setNumberAddress] = useState();
+  const [seller, setSeller] = useState('');
+  const [address, setAddress] = useState('');
+  const [numberAddress, setNumberAddress] = useState('');
   const [sellers, setSellers] = useState([]);
   const { productsCarShop, totalValue } = useContext(DeliveryContext);
 
