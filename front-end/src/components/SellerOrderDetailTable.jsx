@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function SaleTable({ products }) {
+export default function SellerOrderDetailTable({ products }) {
   return (
     <table>
       <thead>
@@ -43,14 +43,14 @@ export default function SaleTable({ products }) {
                 `seller_order_details__element-order-table-unit-price-${index}`
               }
             >
-              { price }
+              { `R$ ${price.replace('.', ',')}` }
             </td>
             <td
               data-testid={
                 `seller_order_details__element-order-table-sub-total-${index}`
               }
             >
-              { (price * quantity).toFixed(2) }
+              { `R$ ${(price * quantity).toFixed(2).replace('.', ',')}` }
             </td>
           </tr>
         ))}
@@ -59,7 +59,7 @@ export default function SaleTable({ products }) {
   );
 }
 
-SaleTable.propTypes = {
+SellerOrderDetailTable.propTypes = {
   products: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
