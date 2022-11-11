@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { requestLogin } from '../services/requests';
+import { saveLogin, getLogin } from '../services/handleStorage';
+import dataTestId from '../utils/dataTestIds';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -11,20 +13,26 @@ export default function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (!user) return;
-    if (user.role === 'customer') return navigate('/customer/products');
-    if (user.role === 'seller') return navigate('/seller/orders');
+    const verifyUserLoged = () => {
+      const user = getLogin();
+      if (!user) return;
+      if (user.role === 'customer') return navigate('/customer/products');
+      if (user.role === 'seller') return navigate('/seller/orders');
+    };
+    verifyUserLoged();
   }, [navigate]);
 
   useEffect(() => {
-    const lengthVerification = 6;
-    const errors = [
-      !email || !email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/),
-      !password || password.length < lengthVerification,
-    ];
-    const hasErrors = errors.some((error) => error);
-    setDisableButton(hasErrors);
+    const verifyLoginData = () => {
+      const lengthVerification = 6;
+      const errors = [
+        !email || !email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/),
+        !password || password.length < lengthVerification,
+      ];
+      const hasErrors = errors.some((error) => error);
+      setDisableButton(hasErrors);
+    };
+    verifyLoginData();
   }, [email, password]);
 
   const login = async (event) => {
@@ -32,59 +40,63 @@ export default function Login() {
     setFailedTryLogin(false);
     try {
       const response = await requestLogin('/login', { email, password });
-      localStorage.setItem('user', JSON.stringify(response));
+      saveLogin(response);
       if (response.role === 'seller') {
         return navigate('/seller/orders');
       }
-      return navigate('/customer/products');
+      if (response.role === 'customer') {
+        return navigate('/customer/products');
+      }
     } catch (error) {
       setFailedTryLogin(true);
     }
   };
 
   return (
-    <section className="user-login-area">
+    <main className="user-login-area">
       <form>
         <label htmlFor="email-input">
+          Email:
           <input
             className="login__login_input"
             type="text"
             value={ email }
             onChange={ ({ target: { value } }) => setEmail(value) }
-            data-testid="common_login__input-email"
             placeholder="email@trybeer.com.br"
+            data-testid={ dataTestId[1] }
           />
         </label>
         <label htmlFor="password-input">
+          Senha:
           <input
             type="password"
             value={ password }
             onChange={ ({ target: { value } }) => setPassword(value) }
-            data-testid="common_login__input-password"
             placeholder="*************"
+            data-testid={ dataTestId[2] }
           />
         </label>
         <button
-          data-testid="common_login__button-login"
           type="submit"
           disabled={ disableButton }
           onClick={ (event) => login(event) }
+          data-testid={ dataTestId[3] }
         >
           LOGIN
         </button>
         <button
-          data-testid="common_login__button-register"
           type="button"
           onClick={ () => navigate('/register') }
+          data-testid={ dataTestId[4] }
         >
           Ainda não tenho conta
         </button>
       </form>
       <div>
         {
-          (failedTryLogin)
+          failedTryLogin
             ? (
-              <p data-testid="common_login__element-invalid-email">
+              <p data-testid={ dataTestId[5] }>
                 {
                   `O endereço de e-mail ou a senha não estão corretos.
                 Por favor, tente novamente.`
@@ -94,6 +106,6 @@ export default function Login() {
             : null
         }
       </div>
-    </section>
+    </main>
   );
 }

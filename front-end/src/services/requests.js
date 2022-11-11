@@ -1,10 +1,12 @@
 import axios from 'axios';
+import { getToken } from './handleStorage';
 
 const api = axios.create({
   baseURL: 'http://localhost:3001',
 });
 
-export const setToken = (token) => {
+export const setToken = () => {
+  const token = getToken();
   api.defaults.headers.common.Authorization = token;
 };
 
@@ -18,13 +20,7 @@ export const requestRegister = async (rota, body) => {
   return data;
 };
 
-export const requestProducts = async () => {
-  const rota = 'http://localhost:3001/products';
-  const { data } = await api.get(rota);
-  return data;
-};
-
-export const getData = async (rota) => {
+export const requestData = async (rota) => {
   const { data } = await api.get(rota);
   return data;
 };

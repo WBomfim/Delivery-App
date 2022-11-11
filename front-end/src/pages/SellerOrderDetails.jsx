@@ -1,31 +1,38 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { getData, requestUpdate, setToken } from '../services/requests';
+import { useParams, useNavigate } from 'react-router-dom';
+import { requestDetails, requestUpdate, setToken } from '../services/requests';
+import { logout } from '../services/handleStorage';
 import Header from '../components/Header';
-import SaleTable from '../components/SaleTable';
+import SellerOrderDetailTable from '../components/SellerOrderDetailTable';
+import dataTestId from '../utils/dataTestIds';
 
 export default function OrderDetails() {
   const [sale, setSale] = useState();
   const { id: paramsId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getSale = async () => {
-      const response = await getData(`/sales/${paramsId}`);
-      setSale(response);
+      try {
+        setToken();
+        const response = await requestDetails('/sales', paramsId);
+        setSale(response);
+      } catch (error) {
+        logout();
+        navigate('/');
+      }
     };
     getSale();
-  }, [paramsId]);
+  }, [paramsId, navigate]);
 
   const prepareSale = async () => {
-    const { token } = JSON.parse(localStorage.getItem('user'));
-    setToken(token);
+    setToken();
     const updatedSale = await requestUpdate('/sales', paramsId, { status: 'Preparando' });
     setSale(updatedSale);
   };
 
   const sendSale = async () => {
-    const { token } = JSON.parse(localStorage.getItem('user'));
-    setToken(token);
+    setToken();
     const updatedSale = await requestUpdate('/sales', paramsId, {
       status: 'Em Trânsito',
     });
@@ -39,24 +46,27 @@ export default function OrderDetails() {
   return (
     <>
       <Header />
-      <section>
+      <main>
         <h1>Detalhes de Pedido</h1>
         <div>
           <div>
             <p
-              data-testid="seller_order_details__element-order-details-label-order-id"
+              data-testid={ dataTestId[53] }
             >
-              { `PEDIDO ${id}` }
+              {
+                `PEDIDO ${id.toLocaleString('en-US', {
+                  minimumIntegerDigits: 4,
+                  useGrouping: false,
+                })}`
+              }
             </p>
             <p
-              data-testid="seller_order_details__element-order-details-label-order-date"
+              data-testid={ dataTestId[55] }
             >
               { saleDate }
             </p>
             <p
-              data-testid={
-                `seller_order_details__element-order-details-label-delivery-status-${id}`
-              }
+              data-testid={ dataTestId[54] }
             >
               { status }
             </p>
@@ -66,7 +76,7 @@ export default function OrderDetails() {
               type="button"
               disabled={ status !== 'Pendente' }
               onClick={ prepareSale }
-              data-testid="seller_order_details__button-preparing-check"
+              data-testid={ dataTestId[56] }
             >
               PREPARAR PEDIDO
             </button>
@@ -74,21 +84,21 @@ export default function OrderDetails() {
               type="button"
               disabled={ status !== 'Preparando' }
               onClick={ sendSale }
-              data-testid="seller_order_details__button-dispatch-check"
+              data-testid={ dataTestId[57] }
             >
               SAIU PARA ENTREGA
             </button>
           </div>
         </div>
-        <SaleTable products={ products } />
+        <SellerOrderDetailTable products={ products } />
         <div>
           <p
-            data-testid="seller_order_details__element-order-total-price"
+            data-testid={ dataTestId[63] }
           >
-            { totalPrice.toString().replace('.', ',') }
+            { `Total: R$ ${totalPrice.toString().replace('.', ',')}` }
           </p>
         </div>
-      </section>
+      </main>
     </>
   );
 }

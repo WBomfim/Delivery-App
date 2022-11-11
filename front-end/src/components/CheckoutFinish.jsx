@@ -1,12 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { logout } from '../services/handleStorage';
 import DeliveryContext from '../context/DeliveryContext';
-import { getData, setToken, requestRegister } from '../services/requests';
+import { requestData, setToken, requestRegister } from '../services/requests';
+import dataTestId from '../utils/dataTestIds';
 
 export default function CheckoutFinish() {
-  const [seller, setSeller] = useState();
-  const [address, setAddress] = useState();
-  const [numberAddress, setNumberAddress] = useState();
+  const [seller, setSeller] = useState('');
+  const [address, setAddress] = useState('');
+  const [numberAddress, setNumberAddress] = useState('');
   const [sellers, setSellers] = useState([]);
   const { productsCarShop, totalValue } = useContext(DeliveryContext);
 
@@ -14,11 +16,17 @@ export default function CheckoutFinish() {
 
   useEffect(() => {
     const getSallers = async () => {
-      const response = await getData('/users/sellers');
-      setSellers(response);
+      try {
+        setToken();
+        const response = await requestData('/users/sellers');
+        setSellers(response);
+      } catch (error) {
+        logout();
+        navigate('/');
+      }
     };
     getSallers();
-  }, []);
+  }, [navigate]);
 
   const finishSale = async () => {
     const saleData = {
@@ -29,11 +37,14 @@ export default function CheckoutFinish() {
       products: productsCarShop,
     };
 
-    const { token } = JSON.parse(localStorage.getItem('user'));
-    setToken(token);
-
-    const { id } = await requestRegister('/sales', saleData);
-    navigate(`/customer/orders/${id}`);
+    try {
+      setToken();
+      const { id } = await requestRegister('/sales', saleData);
+      navigate(`/customer/orders/${id}`);
+    } catch (error) {
+      logout();
+      navigate('/');
+    }
   };
 
   return (
@@ -46,14 +57,16 @@ export default function CheckoutFinish() {
             id="saller"
             value={ seller }
             onChange={ ({ target: { value } }) => setSeller(value) }
-            data-testid="customer_checkout__select-seller"
+            data-testid={ dataTestId[29] }
           >
             <option value="">Selecione um Vendedor</option>
-            {sellers.map((currSaller) => (
-              <option key={ currSaller.id } value={ currSaller.id }>
-                {currSaller.name}
-              </option>
-            ))}
+            {
+              sellers.map((currSaller) => (
+                <option key={ currSaller.id } value={ currSaller.id }>
+                  {currSaller.name}
+                </option>
+              ))
+            }
           </select>
         </label>
         <label htmlFor="address">
@@ -63,7 +76,7 @@ export default function CheckoutFinish() {
             id="address"
             value={ address }
             onChange={ ({ target: { value } }) => setAddress(value) }
-            data-testid="customer_checkout__input-address"
+            data-testid={ dataTestId[30] }
           />
         </label>
         <label htmlFor="number">
@@ -73,14 +86,14 @@ export default function CheckoutFinish() {
             id="number"
             value={ numberAddress }
             onChange={ ({ target: { value } }) => setNumberAddress(value) }
-            data-testid="customer_checkout__input-address-number"
+            data-testid={ dataTestId[31] }
           />
         </label>
       </form>
       <button
         type="button"
         onClick={ finishSale }
-        data-testid="customer_checkout__button-submit-order"
+        data-testid={ dataTestId[32] }
       >
         Finalizar Pedido
       </button>

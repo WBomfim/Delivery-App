@@ -1,14 +1,14 @@
 const Sequilize = require('sequelize');
-const { user, sale, product, salesProduct } = require('../database/models');
-const formatSalesData = require('../helpers/formatSalesData');
 const { development, test, production } = require('../database/config/config');
+const { user, sale, product, salesProduct } = require('../database/models');
+const formatSalesData = require('../helpers/formatSaleData');
 const { errorsTypes } = require('../utils/errorsCatalog');
 
 const sequelize = new Sequilize(development || test || production);
 
 const ASSOCIATIONS = [
-  { model: user, as: 'user', attributes: { exclude: ['id', 'password', 'role'] } },
-  { model: user, as: 'seller', attributes: { exclude: ['id', 'password', 'role'] } },
+  { model: user, as: 'user', attributes: ['name'] },
+  { model: user, as: 'seller', attributes: ['name'] },
   { 
     model: product,
     as: 'products',
@@ -17,25 +17,31 @@ const ASSOCIATIONS = [
   },
 ];
 
-const findAll = async () => {
-  const allSales = await sale.findAll({ include: ASSOCIATIONS });
-  const formatedSales = allSales.map((currSale) => formatSalesData(currSale));
-  return formatedSales;
+const findAllByUser = async (id) => {
+  const allSales = await sale.findAll({ where: { userId: id }, include: ASSOCIATIONS });
+  if (!allSales) throw new Error(errorsTypes.SALES_NOT_FOUND);
+  return allSales.map((currSale) => formatSalesData(currSale));
+};
+
+const findAllBySeller = async (id) => {
+  const allSales = await sale.findAll({ where: { sellerId: id }, include: ASSOCIATIONS });
+  if (!allSales) throw new Error(errorsTypes.SALES_NOT_FOUND);
+  return allSales.map((currSale) => formatSalesData(currSale));
 };
 
 const findById = async (id) => {
   const saleById = await sale.findByPk(id, { include: ASSOCIATIONS });
-  const formatedSale = formatSalesData(saleById);
-  return formatedSale;
+  if (!saleById) throw new Error(errorsTypes.SALE_NOT_FOUND);
+  return formatSalesData(saleById);
 };
 
 const addSale = async (userId, saleData) => {
-  const newSale = await sequelize.transaction(async (transaction) => {
+  const newSaleId = await sequelize.transaction(async (transaction) => {
     const { products, ...saleInfo } = saleData;
     const saleDate = new Date();
     const status = 'Pendente';
 
-    const addNewSale = await sale.create({
+    const { id: saleId } = await sale.create({
       ...saleInfo,
       userId,
       saleDate,
@@ -43,27 +49,28 @@ const addSale = async (userId, saleData) => {
     }, { transaction });
 
     const insertProducts = products.map(({ productId, quantity }) => ({
-      saleId: addNewSale.id, productId, quantity,
+      saleId, productId, quantity,
     }));
     await salesProduct.bulkCreate(insertProducts, { transaction });
 
-    return addNewSale;
+    return saleId;
   });
 
-  return newSale;
+  return findById(newSaleId);
 };
 
-const updateSaleStatus = async (id, saleStatus) => {
-  const propertyUpdate = Object.keys(saleStatus)[0];
-  if (propertyUpdate !== 'status') throw new Error(errorsTypes.PROPERTY_INVALID);
-  await sale.update(saleStatus, { where: { id } });
-  const updatedSale = await findById(id);
-  return updatedSale;
+const updateStatus = async (id, saleStatus) => {
+  const STATUS_TYPE = ['Pendente', 'Preparando', 'Em Trânsito', 'Entregue'];
+  if (!saleStatus) throw new Error(errorsTypes.PROPERTY_STATUS_INVALID);
+  if (!STATUS_TYPE.includes(saleStatus)) throw new Error(errorsTypes.INVALID_STATUS);
+  await sale.update({ status: saleStatus }, { where: { id } });
+  return findById(id);
 };
 
 module.exports = {
-  findAll,
+  findAllByUser,
+  findAllBySeller,
   findById,
   addSale,
-  updateSaleStatus,
+  updateStatus,
 };

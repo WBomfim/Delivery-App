@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { getLogin, logout } from '../services/handleStorage';
+import dataTestId from '../utils/dataTestIds';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -8,17 +10,16 @@ export default function Header() {
   const userType = location.pathname.split('/')[1];
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (!user) {
-      setNameUser('Ciclano da Silva');
-    } else {
-      setNameUser(user.name);
-    }
+    const getUserName = async () => {
+      const { name } = getLogin();
+      setNameUser(name || 'Ciclano da Silva');
+    };
+    getUserName();
   }, []);
 
   const logoutBtn = () => {
-    localStorage.clear();
-    navigate('/');
+    logout();
+    return navigate('/');
   };
 
   const redirectProdutos = () => navigate('/customer/products');
@@ -28,35 +29,37 @@ export default function Header() {
   );
 
   return (
-    <section>
-      { userType === 'customer' && (
-        <button
-          type="button"
-          data-testid="customer_products__element-navbar-link-products"
-          onClick={ redirectProdutos }
-        >
-          PRODUTOS
-        </button>
-      )}
+    <header>
+      {
+        userType === 'customer' && (
+          <button
+            type="button"
+            onClick={ redirectProdutos }
+            data-testid={ dataTestId[11] }
+          >
+            PRODUTOS
+          </button>
+        )
+      }
       <button
         type="button"
-        data-testid="customer_products__element-navbar-link-orders"
         onClick={ redirectMeusPedidos }
+        data-testid={ dataTestId[12] }
       >
         { userType === 'seller' ? 'PEDIDOS' : 'MEUS PEDIDOS' }
       </button>
-      <p
-        data-testid="customer_products__element-navbar-user-full-name"
-      >
-        { nameUser }
-      </p>
-      <button
-        type="button"
-        data-testid="customer_products__element-navbar-link-logout"
-        onClick={ logoutBtn }
-      >
-        Sair
-      </button>
-    </section>
+      <div>
+        <p data-testid={ dataTestId[13] }>
+          { nameUser }
+        </p>
+        <button
+          type="button"
+          onClick={ logoutBtn }
+          data-testid={ dataTestId[14] }
+        >
+          Sair
+        </button>
+      </div>
+    </header>
   );
 }
